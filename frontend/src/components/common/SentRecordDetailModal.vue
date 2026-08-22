@@ -116,34 +116,52 @@
                 class="rounded-2xl p-3 sm:p-4"
                 :class="isDarkMode ? 'bg-zinc-900/60' : 'bg-slate-50/95'"
               >
-                <div class="flex items-center justify-between mb-2 sm:mb-3">
+                <div class="mb-2 flex items-center sm:mb-3">
                   <h4
-                    class="font-medium text-sm sm:text-base flex items-center min-w-0"
+                    class="flex min-w-0 items-center text-sm font-medium sm:text-base"
                     :class="isDarkMode ? 'text-zinc-100' : 'text-slate-900'"
                   >
                     <TerminalIcon
                       class="mr-1.5 h-4 w-4 flex-shrink-0 sm:mr-2 sm:h-5 sm:w-5"
                       :class="isDarkMode ? 'text-zinc-300' : 'text-zinc-700'"
                     />
-                    <span class="truncate">wget下载</span>
+                    <span class="truncate">{{ t('send.terminalDownload.title') }}</span>
                   </h4>
-                  <button
-                    @click="$emit('copy-wget', record)"
-                    class="flex-shrink-0 rounded-lg p-1.5 transition-colors sm:rounded-xl sm:p-2"
-                    :class="isDarkMode ? 'hover:bg-zinc-800' : 'hover:bg-slate-100'"
-                  >
-                    <ClipboardCopyIcon
-                      class="h-4 w-4 sm:h-5 sm:w-5"
-                      :class="isDarkMode ? 'text-zinc-400' : 'text-slate-500'"
-                    />
-                  </button>
                 </div>
                 <p
-                  class="text-xs sm:text-sm font-mono break-all line-clamp-2"
-                  :class="isDarkMode ? 'text-zinc-300' : 'text-slate-600'"
+                  class="mb-2 text-xs sm:mb-3 sm:text-sm"
+                  :class="isDarkMode ? 'text-zinc-400' : 'text-slate-500'"
                 >
-                  点击复制wget命令
+                  {{ t('send.terminalDownload.hint') }}
                 </p>
+                <div class="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    class="rounded-xl border px-2 py-2 text-left transition-colors sm:px-3"
+                    :class="terminalButtonClass"
+                    @click="$emit('copy-curl', record)"
+                  >
+                    <span class="block font-mono text-sm font-semibold">
+                      {{ t('send.terminalDownload.curl') }}
+                    </span>
+                    <span class="block text-[10px] leading-4 opacity-70">
+                      {{ t('send.terminalDownload.curlHint') }}
+                    </span>
+                  </button>
+                  <button
+                    type="button"
+                    class="rounded-xl border px-2 py-2 text-left transition-colors sm:px-3"
+                    :class="terminalButtonClass"
+                    @click="$emit('copy-wget', record)"
+                  >
+                    <span class="block font-mono text-sm font-semibold">
+                      {{ t('send.terminalDownload.wget') }}
+                    </span>
+                    <span class="block text-[10px] leading-4 opacity-70">
+                      {{ t('send.terminalDownload.wgetHint') }}
+                    </span>
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -208,12 +226,19 @@ defineEmits<{
   close: []
   'copy-code': [record: SentFileRecord]
   'copy-link': [record: SentFileRecord]
+  'copy-curl': [record: SentFileRecord]
   'copy-wget': [record: SentFileRecord]
 }>()
 
 const { t } = useI18n()
 const isDarkMode = inject('isDarkMode')
 const qrValue = computed(() => (props.record ? props.getQRCodeValue(props.record) : ''))
+
+const terminalButtonClass = computed(() =>
+  isDarkMode?.value
+    ? 'border-zinc-700 bg-zinc-950/70 text-zinc-100 hover:bg-zinc-800'
+    : 'border-slate-200 bg-white text-slate-900 hover:bg-slate-100'
+)
 </script>
 
 <style scoped>

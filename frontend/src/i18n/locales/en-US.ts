@@ -329,6 +329,14 @@ export default {
     },
     fileDetails: 'File Details',
     expirationMethod: 'Expiration Method',
+    terminalDownload: {
+      title: 'Terminal Download',
+      hint: 'Copy and run in a Linux / macOS terminal',
+      curl: 'curl',
+      wget: 'wget',
+      curlHint: 'macOS / Linux',
+      wgetHint: 'Common on Linux'
+    },
     expiration: {
       day: 'By Day',
       hour: 'By Hour',

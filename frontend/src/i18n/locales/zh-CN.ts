@@ -332,6 +332,14 @@ export default {
       qrCode: '取件二维码',
       scanQrCode: '扫描二维码快速取件'
     },
+    terminalDownload: {
+      title: '终端下载',
+      hint: '复制后在 Linux / macOS 终端执行',
+      curl: 'curl',
+      wget: 'wget',
+      curlHint: 'macOS / Linux',
+      wgetHint: 'Linux 常用'
+    },
     contentPreview: {
       title: '内容预览'
     },

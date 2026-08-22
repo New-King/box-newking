@@ -406,6 +406,7 @@ export function useSendFlow() {
     deleteRecord,
     copySentRecordCode: sentRecordActions.copyCode,
     copySentRecordLink: sentRecordActions.copyLink,
+    copySentRecordCurlCommand: sentRecordActions.copyCurlCommand,
     copySentRecordWgetCommand: sentRecordActions.copyWgetCommand,
     getQRCodeValue: sentRecordActions.getQRCodeValue,
     getUnit,

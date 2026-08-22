@@ -7,7 +7,9 @@ export const STORAGE_KEYS = {
   TOKEN: 'token',
   TOKEN_EXPIRES_AT: 'tokenExpiresAt',
   CONFIG: 'config',
-  NOTIFY: 'notify'
+  NOTIFY: 'notify',
+  SEND_RECORDS: 'box-newking:send-records',
+  RECEIVE_RECORDS: 'box-newking:receive-records'
 } as const
 
 // 主题模式
@@ -57,9 +59,8 @@ export const FILE_SIZE_LIMITS = {
 
 // 时间相关常量
 export const TIME_CONSTANTS = {
-  ALERT_DURATION: 5000, // 5秒
-  REQUEST_TIMEOUT: 300000000,
-  PROGRESS_UPDATE_INTERVAL: 100 // 100毫秒
+  ALERT_DURATION: 2500,
+  REQUEST_TIMEOUT: 300000000
 } as const
 
 // 路由路径
@@ -91,8 +92,10 @@ export const REGEX_PATTERNS = {
 } as const
 
 // 默认配置
+export const APP_NAME = 'box-newking' as const
+
 export const DEFAULT_CONFIG = {
-  name: 'FileCodeBox',
+  name: APP_NAME,
   description: '文件传输工具',
   maxFileSize: FILE_SIZE_LIMITS.MAX_FILE_SIZE,
   allowedFileTypes: ['*'] as string[],

@@ -137,6 +137,7 @@
       @close="closeDetails"
       @copy-code="copySentRecordCode"
       @copy-link="copySentRecordLink"
+      @copy-curl="copySentRecordCurlCommand"
       @copy-wget="copySentRecordWgetCommand"
     />
   </div>
@@ -180,6 +181,7 @@ const {
   closeDetails,
   copySentRecordCode,
   copySentRecordLink,
+  copySentRecordCurlCommand,
   copySentRecordWgetCommand,
   deleteRecord,
   getQRCodeValue,

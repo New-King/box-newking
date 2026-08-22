@@ -2,41 +2,33 @@
   <transition-group
     name="alert-fade"
     tag="div"
-    class="fixed left-4 right-4 top-4 z-50 space-y-3 sm:left-auto sm:w-[24rem]"
+    class="pointer-events-none fixed right-3 top-3 z-50 flex w-[min(20rem,calc(100vw-1.5rem))] flex-col gap-2 sm:right-4"
   >
     <div
       v-for="alert in alerts"
       :key="alert.id"
-      :class="['w-full overflow-hidden rounded-2xl border shadow-2xl backdrop-blur-2xl', cardClass]"
+      :class="[
+        'pointer-events-auto flex items-center gap-2 rounded-lg border px-3 py-2 shadow-md backdrop-blur-md',
+        cardClass
+      ]"
     >
-      <div class="flex items-start gap-3 p-4">
-        <div
-          class="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl"
-          :class="iconToneClass(alert.type)"
-        >
-          <component :is="alertIcons[alert.type]" class="h-5 w-5" />
-        </div>
-        <div class="min-w-0 flex-1">
-          <p class="break-words text-sm font-medium leading-5" :class="messageClass">
-            {{ alert.message }}
-          </p>
-        </div>
-        <button
-          @click="removeAlert(alert.id)"
-          class="inline-flex rounded-lg p-1.5 transition-colors duration-200"
-          :class="closeClass"
-        >
-          <span class="sr-only">{{ t('common.close') }}</span>
-          <X class="h-4 w-4" />
-        </button>
-      </div>
-      <div class="h-0.5" :class="progressTrackClass">
-        <div
-          class="h-full transition-all duration-100 ease-out"
-          :class="progressToneClass(alert.type)"
-          :style="{ width: `${alert.progress}%` }"
-        ></div>
-      </div>
+      <component
+        :is="alertIcons[alert.type]"
+        class="h-4 w-4 flex-shrink-0"
+        :class="iconClass(alert.type)"
+      />
+      <p class="min-w-0 flex-1 text-xs leading-5" :class="messageClass">
+        {{ alert.message }}
+      </p>
+      <button
+        type="button"
+        class="inline-flex flex-shrink-0 rounded p-0.5 transition-colors"
+        :class="closeClass"
+        @click="removeAlert(alert.id)"
+      >
+        <span class="sr-only">{{ t('common.close') }}</span>
+        <X class="h-3.5 w-3.5" />
+      </button>
     </div>
   </transition-group>
 </template>
@@ -45,7 +37,7 @@
 import { storeToRefs } from 'pinia'
 import { useAlertStore } from '@/stores/alertStore'
 import { CheckCircle, AlertTriangle, AlertCircle, Info, X } from 'lucide-vue-next'
-import { computed, onMounted, onUnmounted } from 'vue'
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useInjectedDarkMode } from '@/composables'
 
@@ -54,7 +46,7 @@ const isDarkMode = useInjectedDarkMode()
 
 const alertStore = useAlertStore()
 const { alerts } = storeToRefs(alertStore)
-const { removeAlert, startProgressTimer, stopProgressTimer } = alertStore
+const { removeAlert } = alertStore
 
 type AlertType = 'success' | 'error' | 'warning' | 'info'
 
@@ -67,74 +59,40 @@ const alertIcons = {
 
 const cardClass = computed(() =>
   isDarkMode.value
-    ? 'border-white/10 bg-zinc-900/[0.88] shadow-[0_22px_70px_-34px_rgba(255,255,255,0.2)]'
-    : 'border-white/80 bg-white/[0.88] shadow-[0_22px_70px_-34px_rgba(24,24,27,0.3)]'
+    ? 'border-white/10 bg-zinc-900/90'
+    : 'border-zinc-200/80 bg-white/95'
 )
 
-const messageClass = computed(() => (isDarkMode.value ? 'text-zinc-100' : 'text-zinc-900'))
+const messageClass = computed(() => (isDarkMode.value ? 'text-zinc-100' : 'text-zinc-800'))
 const closeClass = computed(() =>
   isDarkMode.value
-    ? 'text-zinc-500 hover:bg-white/10 hover:text-zinc-200'
-    : 'text-zinc-400 hover:bg-zinc-100 hover:text-zinc-700'
-)
-const progressTrackClass = computed(() =>
-  isDarkMode.value ? 'bg-white/[0.06]' : 'bg-zinc-950/[0.06]'
+    ? 'text-zinc-500 hover:text-zinc-200'
+    : 'text-zinc-400 hover:text-zinc-700'
 )
 
-const iconToneClass = (type: AlertType) => {
-  const darkClasses: Record<AlertType, string> = {
-    success: 'bg-white/10 text-zinc-100',
-    info: 'bg-white/10 text-zinc-100',
-    warning: 'bg-amber-400/12 text-amber-200',
-    error: 'bg-red-400/12 text-red-200'
-  }
-  const lightClasses: Record<AlertType, string> = {
-    success: 'bg-zinc-100 text-zinc-800',
-    info: 'bg-zinc-100 text-zinc-800',
-    warning: 'bg-amber-50 text-amber-700',
-    error: 'bg-red-50 text-red-700'
+const iconClass = (type: AlertType) => {
+  const classes: Record<AlertType, string> = {
+    success: isDarkMode.value ? 'text-emerald-300' : 'text-emerald-600',
+    info: isDarkMode.value ? 'text-zinc-300' : 'text-zinc-600',
+    warning: isDarkMode.value ? 'text-amber-300' : 'text-amber-600',
+    error: isDarkMode.value ? 'text-red-300' : 'text-red-600'
   }
 
-  return isDarkMode.value ? darkClasses[type] : lightClasses[type]
+  return classes[type]
 }
-
-const progressToneClass = (type: AlertType) => {
-  const darkClasses: Record<AlertType, string> = {
-    success: 'bg-zinc-100',
-    info: 'bg-zinc-100',
-    warning: 'bg-amber-300',
-    error: 'bg-red-300'
-  }
-  const lightClasses: Record<AlertType, string> = {
-    success: 'bg-zinc-800',
-    info: 'bg-zinc-800',
-    warning: 'bg-amber-500',
-    error: 'bg-red-500'
-  }
-
-  return isDarkMode.value ? darkClasses[type] : lightClasses[type]
-}
-
-onMounted(() => {
-  startProgressTimer()
-})
-
-onUnmounted(() => {
-  stopProgressTimer()
-})
 </script>
 
 <style scoped>
 .alert-fade-enter-active,
 .alert-fade-leave-active {
   transition:
-    opacity 0.24s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.18s ease,
+    transform 0.18s ease;
 }
 
 .alert-fade-enter-from,
 .alert-fade-leave-to {
   opacity: 0;
-  transform: translateY(-8px) scale(0.98);
+  transform: translateY(-4px);
 }
 </style>

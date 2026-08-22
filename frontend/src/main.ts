@@ -7,15 +7,11 @@ import App from './App.vue'
 import router from './router'
 import i18n from './i18n'
 
-const OPEN_SOURCE_BANNER = String.raw`
-  ______ _ _      _____          _      ____            
- |  ____(_) |    / ____|        | |    |  _ \           
- | |__   _| | ___| |     ___   __| | ___| |_) | _____  __
- |  __| | | |/ _ \ |    / _ \ / _\` |/ _ \  _ < / _ \ \/ /
- | |    | | |  __/ |___| (_) | (_| |  __/ |_) | (_) >  < 
- |_|    |_|_|\___|\_____\___/ \__,_|\___|____/ \___/_/\_\
+import { APP_NAME } from '@/constants'
 
- Open Source: https://github.com/vastsa/FileCodeBox
+const OPEN_SOURCE_BANNER = `
+  ${APP_NAME} — 文件快传 (box.new-king.com)
+  Open Source: https://github.com/New-King/box-newking
 `
 
 console.info(OPEN_SOURCE_BANNER)

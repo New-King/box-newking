@@ -871,6 +871,35 @@ def resolve_theme_file(*parts: str):
     return file_path
 
 
+def render_site_index_html() -> str:
+    try:
+        raw = resolve_theme_file("index.html").read_text(encoding="utf-8")
+    except HTTPException:
+        site_name = html.escape(str(settings.name))
+        site_description = html.escape(str(settings.description))
+        raw = f"""<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{site_name}</title>
+</head>
+<body style="font-family: system-ui, sans-serif; max-width: 40rem; margin: 4rem auto; padding: 0 1rem; line-height: 1.6;">
+  <h1>{site_name}</h1>
+  <p>{site_description}</p>
+  <p>后端 API 已运行。本地开发请访问前端：<a href="http://localhost:5173">http://localhost:5173</a></p>
+  <p><a href="http://localhost:5173/#/admin">管理后台</a> · <a href="/health">健康检查</a></p>
+</body>
+</html>"""
+    return (
+        raw.replace("{{title}}", str(settings.name))
+        .replace("{{description}}", str(settings.description))
+        .replace("{{keywords}}", str(settings.keywords))
+        .replace("{{opacity}}", str(settings.opacity))
+        .replace("{{background}}", str(settings.background))
+    )
+
+
 @app.get("/assets/{asset_path:path}", include_in_schema=False)
 async def theme_asset(asset_path: str):
     return FileResponse(resolve_theme_file("assets", asset_path))
@@ -880,13 +909,7 @@ async def theme_asset(asset_path: str):
 @app.get("/")
 async def index(request=None, exc=None):
     return HTMLResponse(
-        content=resolve_theme_file("index.html")
-        .read_text(encoding="utf-8")
-        .replace("{{title}}", str(settings.name))
-        .replace("{{description}}", str(settings.description))
-        .replace("{{keywords}}", str(settings.keywords))
-        .replace("{{opacity}}", str(settings.opacity))
-        .replace("{{background}}", str(settings.background)),
+        content=render_site_index_html(),
         media_type="text/html",
         headers={"Cache-Control": "no-cache"},
     )

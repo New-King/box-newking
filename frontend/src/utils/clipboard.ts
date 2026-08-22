@@ -2,7 +2,7 @@
  * 剪贴板工具函数
  */
 
-import { buildRetrieveUrl, buildWgetCommand } from '@/utils/share-url'
+import { buildCurlCommand, buildRetrieveUrl, buildWgetCommand } from '@/utils/share-url'
 
 type CopyNotifyType = 'success' | 'error'
 
@@ -105,7 +105,20 @@ export const copyWgetCommand = (
 ) => {
   const command = buildWgetCommand(retrieveCode, fileName)
   void copyToClipboard(command, {
-    successMsg: '命令已复制到剪贴板',
+    successMsg: 'wget 命令已复制',
+    errorMsg: '复制失败，请手动复制命令',
+    ...options
+  })
+}
+
+export const copyCurlCommand = (
+  retrieveCode: string,
+  fileName: string,
+  options: Pick<CopyOptions, 'notify' | 'showMsg'> = {}
+) => {
+  const command = buildCurlCommand(retrieveCode, fileName)
+  void copyToClipboard(command, {
+    successMsg: 'curl 命令已复制',
     errorMsg: '复制失败，请手动复制命令',
     ...options
   })

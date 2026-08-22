@@ -8,9 +8,6 @@ export interface Alert {
   id: number
   message: string
   type: AlertType
-  progress: number
-  duration: number
-  startTime: number
 }
 
 export type UploadStatus = 'idle' | 'uploading' | 'success' | 'error'
