@@ -34,7 +34,8 @@ jobs:
           VITE_GIT_COMMIT: ${{ github.sha }}
         run: |
           pnpm install --frozen-lockfile
-          pnpm run build
+          # 部署只打包，type-check 在本地/PR 时做即可，省 1～2 分钟
+          pnpm run build-only
 
       - name: Sync backend to server
         run: |

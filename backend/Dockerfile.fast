@@ -1,4 +1,5 @@
 # 快速部署专用：假定 themes/2024 已在 CI 中 build 好并 rsync 到服务器
+# 按国内服务器优化：阿里云 pip 源、跳过 apt upgrade、利用依赖层缓存
 FROM python:3.12-slim-bookworm
 
 ARG APP_VERSION=2.5.4-dev
@@ -7,24 +8,28 @@ ARG VCS_REF=unknown
 LABEL org.opencontainers.image.version="${APP_VERSION}"
 LABEL org.opencontainers.image.revision="${VCS_REF}"
 
-WORKDIR /app
-
-COPY . .
-
-ENV APP_VERSION="${APP_VERSION}" \
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    APP_VERSION="${APP_VERSION}" \
     HOST="0.0.0.0" \
     PORT=12345 \
     WORKERS=1 \
     LOG_LEVEL="info" \
     FORWARDED_ALLOW_IPS=""
 
+WORKDIR /app
+
+# 先只复制依赖清单：requirements 不变时 Docker 可复用这一层，不用每次重装
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt \
+    -i https://mirrors.aliyun.com/pypi/simple/ \
+    --trusted-host mirrors.aliyun.com
+
+# 再复制业务代码和已 rsync 好的前端静态文件
+COPY . .
+
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-    echo 'Asia/Shanghai' > /etc/timezone && \
-    apt-get update && \
-    apt-get upgrade -y --no-install-recommends && \
-    rm -rf /var/lib/apt/lists/* && \
-    pip install --no-cache-dir -r requirements.txt && \
-    (pip cache purge || true)
+    echo 'Asia/Shanghai' > /etc/timezone
 
 EXPOSE 12345
 
