@@ -14,9 +14,25 @@ Special thanks to the original author for creating such a useful tool.
 
 ### Differences from the original
 
-- UI redesign and optimization
-- Additional features (e.g., ...)
-- Bug fixes
+**功能与体验**
+
+- 发件 / 取件记录写入 `localStorage`，刷新后仍可查看
+- 右上角 Toast 更紧凑，去掉进度条，自动关闭 2.5s（原 5s）
+- 发件详情增加 **curl** 与 **wget** 两个复制按钮，并修正下载 URL 为 `/share/select/?code=`
+- 深色模式色板对齐 [newking](https://new-king.com)（`#242426` 页面 / `#2c2c2e` 卡片 / `#343436` 外壳）
+- 发件页文件 / 文本切换改为上传区右上角圆形按钮，`PageHeader` 标题随模式变化（「发送文件」↔「发送文本」）
+- 发件 / 取件记录移至顶部全局 History 图标；抽屉内 Tab 可切换两种记录；底部仅保留页面跳转链接
+- PageHeader 取件 / 发送图标 hover 时丝滑变形（[morphicons](https://github.com/guillermolg00/morphicons)：`CloudDownload` ↔ `Send`）
+- 发件页文件 / 文本切换按钮 hover 时图标变形（`File` ↔ `Type`）
+
+**品牌与部署（box-newking 自用）**
+
+- 站点标题与默认文案为 box-newking（`APP_NAME`、页面 title 等）
+- 后端默认站点描述等配置为 box-newking 文案
+- 本地开发无 `themes/` 目录时，根路径提供兜底页
+- 增加 `deploy-fast` 流水线：GitHub 构建前端 → rsync → 服务器仅 build 后端（日常 push `main` 快速上线）
+
+更完整的文件清单与向上游提 PR 建议见 [`UPSTREAM_PR_NOTES.md`](UPSTREAM_PR_NOTES.md)。
 
 ## 项目结构
 

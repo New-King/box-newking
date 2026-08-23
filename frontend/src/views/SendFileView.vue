@@ -35,9 +35,18 @@
                 "
                 :aria-label="toggleTypeLabel"
                 :title="toggleTypeLabel"
+                @mouseenter="toggleHovered = true"
+                @mouseleave="toggleHovered = false"
+                @focus="toggleHovered = true"
+                @blur="toggleHovered = false"
                 @click.stop="toggleSendType"
               >
-                <ArrowLeftRight class="h-5 w-5 sm:h-[1.35rem] sm:w-[1.35rem]" :stroke-width="2" />
+                <MorphIcon
+                  :icon="toggleIcon"
+                  spring="snappy"
+                  class="h-5 w-5 sm:h-[1.35rem] sm:w-[1.35rem]"
+                  :stroke-width="2"
+                />
               </button>
 
               <transition name="fade" mode="out-in">
@@ -114,10 +123,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
-import { ArrowLeftRight, LoaderCircleIcon, SendIcon } from 'lucide-vue-next'
+import { File, Type } from 'lucide'
+import { MorphIcon } from 'morphicons/vue'
+import { LoaderCircleIcon, SendIcon } from 'lucide-vue-next'
 import PageHeader from '@/components/common/PageHeader.vue'
 import PageFooter from '@/components/common/PageFooter.vue'
 import FileUploadArea from '@/components/common/FileUploadArea.vue'
@@ -162,9 +173,18 @@ const toRetrieve = () => {
   router.push('/')
 }
 
+const toggleHovered = ref(false)
+
 const toggleTypeLabel = computed(() =>
   sendType.value === 'file' ? t('send.sendText') : t('nav.sendFile')
 )
+
+const toggleIcon = computed(() => {
+  if (sendType.value === 'file') {
+    return toggleHovered.value ? Type : File
+  }
+  return toggleHovered.value ? File : Type
+})
 
 const headerTitle = computed(() =>
   sendType.value === 'file' ? t('nav.sendFile') : t('send.sendText')
