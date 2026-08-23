@@ -104,20 +104,20 @@ pnpm dev
 | http://localhost:5173/#/admin | 管理端（开发模式） |
 | http://localhost:12345 | 后端 API |
 
-## 部署方案（两条流水线）
-
-本仓库同时支持两种部署方式，用途不同、可以并存：
+## 部署方案（三条流水线）
 
 | 流水线 | 文件 | 触发 | 作用 | 谁用 |
 |--------|------|------|------|------|
-| **发布镜像** | `docker-image.yml` | push / tag | build 镜像 → 推 Docker Hub | 别人 `docker run`、你换机器时 |
-| **自动部署** | `deploy.yml` | 镜像 build 成功后 | SSH → `docker pull` → 重启容器 | **你自己**日常 push 上线 |
+| **发布镜像** | `docker-image.yml` | push / tag | build 镜像 → 推 Docker Hub | 别人 `docker run`、发版 |
+| **镜像部署** | `deploy.yml` | 镜像 build 成功后 | SSH → `docker pull` → 重启 | 用 Hub 镜像更新服务器 |
+| **快速部署** | `deploy-fast.yml` | push `main` | GitHub build 前端 → rsync → 服务器只 build 后端 | **日常自用（像 newking）** |
 
 ```
-你 push 到 main
-    ├─→ docker-image.yml：build → Docker Hub（:dev）
-    └─→ deploy.yml：SSH 服务器 pull + 重启（像 newking 一样省心）
+学习 / 发版：docker-image → Docker Hub → deploy（慢，标准）
+日常自用：  deploy-fast（快，push 即上线）
 ```
+
+**跑通快速部署后**，建议在 Actions 里 **Disable** 前两条，只留「快速部署」，避免一次 push 触发三套流程。
 
 ## Docker 部署（生产，单容器）
 

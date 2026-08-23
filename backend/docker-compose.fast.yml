@@ -1,0 +1,25 @@
+# 快速部署：CI 在 GitHub 上 build 前端，服务器只 build 后端 Python 镜像
+services:
+  box-newking:
+    build:
+      context: .
+      dockerfile: Dockerfile.fast
+      args:
+        APP_VERSION: "2.5.4-dev"
+        VCS_REF: "fast-deploy"
+    image: box-newking:fast
+    container_name: box-newking
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:12345:12345"
+    volumes:
+      - box-newking-data:/app/data:rw
+    networks:
+      - 1panel-network
+
+networks:
+  1panel-network:
+    external: true
+
+volumes:
+  box-newking-data:

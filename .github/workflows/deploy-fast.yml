@@ -1,0 +1,81 @@
+# 快速部署（自用）：push → GitHub build 前端 → rsync → 服务器只 build 后端
+# 比 Docker Hub 全流程快，类似 newking 的 deploy.yml
+# 跑通后可在 Actions 里 Disable「Build and push」「Deploy to server」，日常只用本流水线
+name: 快速部署
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+          cache-dependency-path: frontend/pnpm-lock.yaml
+
+      - name: Build frontend
+        working-directory: frontend
+        env:
+          VITE_GIT_COMMIT: ${{ github.sha }}
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm run build
+
+      - name: Sync backend to server
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          SSH="ssh -i ~/.ssh/deploy_key -p ${{ secrets.SERVER_PORT }} -o StrictHostKeyChecking=no"
+          ${SSH} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "mkdir -p /opt/server/box-newking/backend/themes/2024"
+          rsync -avz \
+            --exclude '.venv' \
+            --exclude '__pycache__' \
+            --exclude 'data' \
+            --exclude 'themes/2024' \
+            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SERVER_PORT }} -o StrictHostKeyChecking=no" \
+            backend/ \
+            ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/opt/server/box-newking/backend/
+
+      - name: Sync frontend dist to themes/2024
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          rsync -avz --delete \
+            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SERVER_PORT }} -o StrictHostKeyChecking=no" \
+            frontend/dist/ \
+            ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/opt/server/box-newking/backend/themes/2024/
+
+      - name: Rebuild and restart backend container
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.SERVER_PORT }} -o StrictHostKeyChecking=no \
+            ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} '
+              set -euo pipefail
+              cd /opt/server/box-newking/backend
+              docker compose -f docker-compose.fast.yml up -d --build
+              docker compose -f docker-compose.fast.yml ps
+            '
+
+      - name: Health check
+        run: |
+          sleep 5
+          curl -fsS "https://box.new-king.com/health" || echo "健康检查未通过（可能域名/反代尚未配置）"
