@@ -3,6 +3,10 @@
     <button
       type="button"
       @click="$emit('title-click')"
+      @mouseenter="hovered = true"
+      @mouseleave="hovered = false"
+      @focus="hovered = true"
+      @blur="hovered = false"
       class="group relative mb-4 flex h-14 w-14 items-center justify-center rounded-[1rem] border transition-transform duration-300 hover:scale-105 sm:mb-6 sm:h-16 sm:w-16 sm:rounded-[1.25rem]"
       :class="
         isDarkMode
@@ -15,7 +19,12 @@
         class="absolute inset-0 rounded-[1rem] opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-100 sm:rounded-[1.25rem]"
         :class="isDarkMode ? 'bg-white/10' : 'bg-zinc-300/40'"
       ></div>
-      <component :is="headerIcon" class="relative z-10 h-7 w-7 sm:h-8 sm:w-8" :stroke-width="1.5" />
+      <MorphIcon
+        :icon="headerIcon"
+        spring="snappy"
+        class="relative z-10 h-7 w-7 sm:h-8 sm:w-8"
+        :stroke-width="1.5"
+      />
     </button>
     <h1
       @click="$emit('title-click')"
@@ -35,8 +44,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject } from 'vue'
-import { CloudDownloadIcon, SendIcon } from 'lucide-vue-next'
+import { computed, inject, ref } from 'vue'
+import { CloudDownload, Send } from 'lucide'
+import { MorphIcon } from 'morphicons/vue'
 
 interface Props {
   title: string
@@ -55,5 +65,12 @@ const props = withDefaults(defineProps<Props>(), {
 defineEmits<Emits>()
 
 const isDarkMode = inject('isDarkMode')
-const headerIcon = computed(() => (props.mode === 'send' ? SendIcon : CloudDownloadIcon))
+const hovered = ref(false)
+
+const headerIcon = computed(() => {
+  if (props.mode === 'send') {
+    return hovered.value ? CloudDownload : Send
+  }
+  return hovered.value ? Send : CloudDownload
+})
 </script>
