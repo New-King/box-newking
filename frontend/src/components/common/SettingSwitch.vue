@@ -27,7 +27,7 @@
           class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
           :class="[
             modelValue === 1 ? 'translate-x-5' : 'translate-x-0',
-            isDarkMode && modelValue === 1 ? 'bg-zinc-950' : 'bg-white'
+            isDarkMode && modelValue === 1 ? 'bg-[#242426]' : 'bg-white'
           ]"
         />
       </button>

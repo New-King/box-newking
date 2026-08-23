@@ -115,7 +115,7 @@ onMounted(() => {
               class="w-full rounded-md shadow-sm px-4 py-2.5 transition-all duration-200 ease-in-out border focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 outline-none"
               :class="[
                 isDarkMode
-                  ? 'border-white/10 bg-zinc-950/45 text-white placeholder-zinc-500 hover:border-white/20'
+                  ? 'border-white/10 bg-[#2c2c2e] text-white placeholder-zinc-500 hover:border-white/20'
                   : 'border-zinc-200/80 bg-white/80 text-zinc-950 placeholder-zinc-400 hover:border-zinc-300'
               ]"
             />
@@ -134,7 +134,7 @@ onMounted(() => {
               class="w-full rounded-md shadow-sm px-4 py-2.5 transition-all duration-200 ease-in-out border focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 outline-none"
               :class="[
                 isDarkMode
-                  ? 'border-white/10 bg-zinc-950/45 text-white placeholder-zinc-500 hover:border-white/20'
+                  ? 'border-white/10 bg-[#2c2c2e] text-white placeholder-zinc-500 hover:border-white/20'
                   : 'border-zinc-200/80 bg-white/80 text-zinc-950 placeholder-zinc-400 hover:border-zinc-300'
               ]"
             />
@@ -156,7 +156,7 @@ onMounted(() => {
                 class="w-full rounded-md shadow-sm px-4 py-2.5 transition-all duration-200 ease-in-out border focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 outline-none"
                 :class="[
                   isDarkMode
-                    ? 'border-white/10 bg-zinc-950/45 text-white placeholder-zinc-500 hover:border-white/20'
+                    ? 'border-white/10 bg-[#2c2c2e] text-white placeholder-zinc-500 hover:border-white/20'
                     : 'border-zinc-200/80 bg-white/80 text-zinc-950 placeholder-zinc-400 hover:border-zinc-300'
                 ]"
               />
@@ -205,7 +205,7 @@ onMounted(() => {
               class="w-full rounded-md shadow-sm px-4 py-2.5 transition-all duration-200 ease-in-out border focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 outline-none"
               :class="[
                 isDarkMode
-                  ? 'border-white/10 bg-zinc-950/45 text-white placeholder-zinc-500 hover:border-white/20'
+                  ? 'border-white/10 bg-[#2c2c2e] text-white placeholder-zinc-500 hover:border-white/20'
                   : 'border-zinc-200/80 bg-white/80 text-zinc-950 placeholder-zinc-400 hover:border-zinc-300'
               ]"
             />
@@ -224,7 +224,7 @@ onMounted(() => {
               class="w-full rounded-md shadow-sm px-4 py-2.5 transition-all duration-200 ease-in-out border appearance-none bg-no-repeat bg-right focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 outline-none cursor-pointer"
               :class="[
                 isDarkMode
-                  ? 'border-white/10 bg-zinc-950/45 text-white hover:border-white/20'
+                  ? 'border-white/10 bg-[#2c2c2e] text-white hover:border-white/20'
                   : 'border-zinc-200/80 bg-white/80 text-zinc-950 hover:border-zinc-300'
               ]"
               style="
@@ -249,7 +249,7 @@ onMounted(() => {
               class="w-full rounded-md shadow-sm px-4 py-2.5 transition-all duration-200 ease-in-out border resize-none focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 outline-none"
               :class="[
                 isDarkMode
-                  ? 'border-white/10 bg-zinc-950/45 text-white placeholder-zinc-500 hover:border-white/20'
+                  ? 'border-white/10 bg-[#2c2c2e] text-white placeholder-zinc-500 hover:border-white/20'
                   : 'border-zinc-200/80 bg-white/80 text-zinc-950 placeholder-zinc-400 hover:border-zinc-300'
               ]"
             ></textarea>
@@ -271,7 +271,7 @@ onMounted(() => {
               class="w-full rounded-md shadow-sm px-4 py-2.5 transition-all duration-200 ease-in-out border focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 outline-none"
               :class="[
                 isDarkMode
-                  ? 'border-white/10 bg-zinc-950/45 text-white placeholder-zinc-500 hover:border-white/20'
+                  ? 'border-white/10 bg-[#2c2c2e] text-white placeholder-zinc-500 hover:border-white/20'
                   : 'border-zinc-200/80 bg-white/80 text-zinc-950 placeholder-zinc-400 hover:border-zinc-300'
               ]"
             />
@@ -290,7 +290,7 @@ onMounted(() => {
               class="w-full rounded-md shadow-sm px-4 py-2.5 transition-all duration-200 ease-in-out border resize-none focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 outline-none"
               :class="[
                 isDarkMode
-                  ? 'border-white/10 bg-zinc-950/45 text-white placeholder-zinc-500 hover:border-white/20'
+                  ? 'border-white/10 bg-[#2c2c2e] text-white placeholder-zinc-500 hover:border-white/20'
                   : 'border-zinc-200/80 bg-white/80 text-zinc-950 placeholder-zinc-400 hover:border-zinc-300'
               ]"
             ></textarea>
@@ -320,7 +320,7 @@ onMounted(() => {
               class="w-full rounded-md shadow-sm px-4 py-2.5 transition-all duration-200 ease-in-out border focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 outline-none"
               :class="[
                 isDarkMode
-                  ? 'border-white/10 bg-zinc-950/45 text-white placeholder-zinc-500 hover:border-white/20'
+                  ? 'border-white/10 bg-[#2c2c2e] text-white placeholder-zinc-500 hover:border-white/20'
                   : 'border-zinc-200/80 bg-white/80 text-zinc-950 placeholder-zinc-400 hover:border-zinc-300'
               ]"
             />
@@ -339,7 +339,7 @@ onMounted(() => {
                 class="w-full rounded-md shadow-sm px-4 py-2.5 transition-all duration-200 ease-in-out border appearance-none bg-no-repeat bg-right focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 outline-none cursor-pointer"
                 :class="[
                   isDarkMode
-                    ? 'border-white/10 bg-zinc-950/45 text-white hover:border-white/20'
+                    ? 'border-white/10 bg-[#2c2c2e] text-white hover:border-white/20'
                     : 'border-zinc-200/80 bg-white/80 text-zinc-950 hover:border-zinc-300'
                 ]"
                 style="
@@ -375,7 +375,7 @@ onMounted(() => {
                   class="w-full rounded-md shadow-sm px-4 py-2.5 transition-all duration-200 ease-in-out border focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 outline-none"
                   :class="[
                     isDarkMode
-                      ? 'border-white/10 bg-zinc-950/45 text-white placeholder-zinc-500 hover:border-white/20'
+                      ? 'border-white/10 bg-[#2c2c2e] text-white placeholder-zinc-500 hover:border-white/20'
                       : 'border-zinc-200/80 bg-white/80 text-zinc-950 placeholder-zinc-400 hover:border-zinc-300'
                   ]"
                 />
@@ -395,7 +395,7 @@ onMounted(() => {
                     class="w-full rounded-md shadow-sm px-4 py-2.5 transition-all duration-200 ease-in-out border focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 outline-none"
                     :class="[
                       isDarkMode
-                        ? 'border-white/10 bg-zinc-950/45 text-white placeholder-zinc-500 hover:border-white/20'
+                        ? 'border-white/10 bg-[#2c2c2e] text-white placeholder-zinc-500 hover:border-white/20'
                         : 'border-zinc-200/80 bg-white/80 text-zinc-950 placeholder-zinc-400 hover:border-zinc-300'
                     ]"
                   />
@@ -415,7 +415,7 @@ onMounted(() => {
                     class="w-full rounded-md shadow-sm px-4 py-2.5 transition-all duration-200 ease-in-out border focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 outline-none"
                     :class="[
                       isDarkMode
-                        ? 'border-white/10 bg-zinc-950/45 text-white placeholder-zinc-500 hover:border-white/20'
+                        ? 'border-white/10 bg-[#2c2c2e] text-white placeholder-zinc-500 hover:border-white/20'
                         : 'border-zinc-200/80 bg-white/80 text-zinc-950 placeholder-zinc-400 hover:border-zinc-300'
                     ]"
                   />
@@ -438,7 +438,7 @@ onMounted(() => {
                     class="w-full rounded-md shadow-sm px-4 py-2.5 transition-all duration-200 ease-in-out border focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 outline-none"
                     :class="[
                       isDarkMode
-                        ? 'border-white/10 bg-zinc-950/45 text-white placeholder-zinc-500 hover:border-white/20'
+                        ? 'border-white/10 bg-[#2c2c2e] text-white placeholder-zinc-500 hover:border-white/20'
                         : 'border-zinc-200/80 bg-white/80 text-zinc-950 placeholder-zinc-400 hover:border-zinc-300'
                     ]"
                   />
@@ -457,7 +457,7 @@ onMounted(() => {
                     class="w-full rounded-md shadow-sm px-4 py-2.5 transition-all duration-200 ease-in-out border focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 outline-none"
                     :class="[
                       isDarkMode
-                        ? 'border-white/10 bg-zinc-950/45 text-white placeholder-zinc-500 hover:border-white/20'
+                        ? 'border-white/10 bg-[#2c2c2e] text-white placeholder-zinc-500 hover:border-white/20'
                         : 'border-zinc-200/80 bg-white/80 text-zinc-950 placeholder-zinc-400 hover:border-zinc-300'
                     ]"
                   />
@@ -476,7 +476,7 @@ onMounted(() => {
                     class="w-full rounded-md shadow-sm px-4 py-2.5 transition-all duration-200 ease-in-out border focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 outline-none"
                     :class="[
                       isDarkMode
-                        ? 'border-white/10 bg-zinc-950/45 text-white placeholder-zinc-500 hover:border-white/20'
+                        ? 'border-white/10 bg-[#2c2c2e] text-white placeholder-zinc-500 hover:border-white/20'
                         : 'border-zinc-200/80 bg-white/80 text-zinc-950 placeholder-zinc-400 hover:border-zinc-300'
                     ]"
                   />
@@ -495,7 +495,7 @@ onMounted(() => {
                     class="w-full rounded-md shadow-sm px-4 py-2.5 transition-all duration-200 ease-in-out border focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 outline-none"
                     :class="[
                       isDarkMode
-                        ? 'border-white/10 bg-zinc-950/45 text-white placeholder-zinc-500 hover:border-white/20'
+                        ? 'border-white/10 bg-[#2c2c2e] text-white placeholder-zinc-500 hover:border-white/20'
                         : 'border-zinc-200/80 bg-white/80 text-zinc-950 placeholder-zinc-400 hover:border-zinc-300'
                     ]"
                   />
@@ -515,7 +515,7 @@ onMounted(() => {
                     class="w-full rounded-md shadow-sm px-4 py-2.5 transition-all duration-200 ease-in-out border focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 outline-none"
                     :class="[
                       isDarkMode
-                        ? 'border-white/10 bg-zinc-950/45 text-white placeholder-zinc-500 hover:border-white/20'
+                        ? 'border-white/10 bg-[#2c2c2e] text-white placeholder-zinc-500 hover:border-white/20'
                         : 'border-zinc-200/80 bg-white/80 text-zinc-950 placeholder-zinc-400 hover:border-zinc-300'
                     ]"
                   />
@@ -533,7 +533,7 @@ onMounted(() => {
                     class="w-full rounded-md shadow-sm px-4 py-2.5 transition-all duration-200 ease-in-out border focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 outline-none"
                     :class="[
                       isDarkMode
-                        ? 'border-white/10 bg-zinc-950/45 text-white hover:border-white/20'
+                        ? 'border-white/10 bg-[#2c2c2e] text-white hover:border-white/20'
                         : 'border-zinc-200/80 bg-white/80 text-zinc-950 hover:border-zinc-300'
                     ]"
                   >
@@ -554,7 +554,7 @@ onMounted(() => {
                     class="w-full rounded-md shadow-sm px-4 py-2.5 transition-all duration-200 ease-in-out border focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 outline-none"
                     :class="[
                       isDarkMode
-                        ? 'border-white/10 bg-zinc-950/45 text-white hover:border-white/20'
+                        ? 'border-white/10 bg-[#2c2c2e] text-white hover:border-white/20'
                         : 'border-zinc-200/80 bg-white/80 text-zinc-950 hover:border-zinc-300'
                     ]"
                   >
@@ -577,7 +577,7 @@ onMounted(() => {
                     class="w-full rounded-md shadow-sm px-4 py-2.5 transition-all duration-200 ease-in-out border focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 outline-none"
                     :class="[
                       isDarkMode
-                        ? 'border-white/10 bg-zinc-950/45 text-white placeholder-zinc-500 hover:border-white/20'
+                        ? 'border-white/10 bg-[#2c2c2e] text-white placeholder-zinc-500 hover:border-white/20'
                         : 'border-zinc-200/80 bg-white/80 text-zinc-950 placeholder-zinc-400 hover:border-zinc-300'
                     ]"
                   />
@@ -639,7 +639,7 @@ onMounted(() => {
                   class="w-24 rounded-md shadow-sm px-4 py-2.5 transition-all duration-200 ease-in-out border focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 outline-none"
                   :class="[
                     isDarkMode
-                      ? 'border-white/10 bg-zinc-950/45 text-white placeholder-zinc-500 hover:border-white/20'
+                      ? 'border-white/10 bg-[#2c2c2e] text-white placeholder-zinc-500 hover:border-white/20'
                       : 'border-zinc-200/80 bg-white/80 text-zinc-950 placeholder-zinc-400 hover:border-zinc-300'
                   ]"
                 />
@@ -648,7 +648,7 @@ onMounted(() => {
                   class="rounded-md shadow-sm px-4 py-2.5 transition-all duration-200 ease-in-out border focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 outline-none"
                   :class="[
                     isDarkMode
-                      ? 'border-white/10 bg-zinc-950/45 text-white hover:border-white/20'
+                      ? 'border-white/10 bg-[#2c2c2e] text-white hover:border-white/20'
                       : 'border-zinc-200/80 bg-white/80 text-zinc-950 hover:border-zinc-300'
                   ]"
                 >
@@ -673,7 +673,7 @@ onMounted(() => {
                 class="w-full rounded-md shadow-sm px-4 py-2.5 transition-all duration-200 ease-in-out border focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 outline-none"
                 :class="[
                   isDarkMode
-                    ? 'border-white/10 bg-zinc-950/45 text-white placeholder-zinc-500 hover:border-white/20'
+                    ? 'border-white/10 bg-[#2c2c2e] text-white placeholder-zinc-500 hover:border-white/20'
                     : 'border-zinc-200/80 bg-white/80 text-zinc-950 placeholder-zinc-400 hover:border-zinc-300'
                 ]"
                 :placeholder="t('manage.settings.allowedFileTypesPlaceholder')"
@@ -732,7 +732,7 @@ onMounted(() => {
                 class="w-full rounded-md shadow-sm px-4 py-2.5 transition-all duration-200 ease-in-out border focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 outline-none"
                 :class="[
                   isDarkMode
-                    ? 'border-white/10 bg-zinc-950/45 text-white hover:border-white/20'
+                    ? 'border-white/10 bg-[#2c2c2e] text-white hover:border-white/20'
                     : 'border-zinc-200/80 bg-white/80 text-zinc-950 hover:border-zinc-300'
                 ]"
               >
@@ -758,7 +758,7 @@ onMounted(() => {
                   class="w-24 rounded-md shadow-sm px-4 py-2.5 transition-all duration-200 ease-in-out border focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 outline-none"
                   :class="[
                     isDarkMode
-                      ? 'border-white/10 bg-zinc-950/45 text-white placeholder-zinc-500 hover:border-white/20'
+                      ? 'border-white/10 bg-[#2c2c2e] text-white placeholder-zinc-500 hover:border-white/20'
                       : 'border-zinc-200/80 bg-white/80 text-zinc-950 placeholder-zinc-400 hover:border-zinc-300'
                   ]"
                 />
@@ -767,7 +767,7 @@ onMounted(() => {
                   class="rounded-md shadow-sm px-4 py-2.5 transition-all duration-200 ease-in-out border focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 outline-none"
                   :class="[
                     isDarkMode
-                      ? 'border-white/10 bg-zinc-950/45 text-white hover:border-white/20'
+                      ? 'border-white/10 bg-[#2c2c2e] text-white hover:border-white/20'
                       : 'border-zinc-200/80 bg-white/80 text-zinc-950 hover:border-zinc-300'
                   ]"
                 >
@@ -795,7 +795,7 @@ onMounted(() => {
                   class="w-28 rounded-md border px-4 py-2.5 shadow-sm outline-none transition-all duration-200 focus:border-zinc-500 focus:ring-2 focus:ring-zinc-500"
                   :class="[
                     isDarkMode
-                      ? 'border-white/10 bg-zinc-950/45 text-white hover:border-white/20'
+                      ? 'border-white/10 bg-[#2c2c2e] text-white hover:border-white/20'
                       : 'border-zinc-200/80 bg-white/80 text-zinc-950 hover:border-zinc-300'
                   ]"
                 />
@@ -804,7 +804,7 @@ onMounted(() => {
                   class="rounded-md border px-4 py-2.5 shadow-sm outline-none transition-all duration-200 focus:border-zinc-500 focus:ring-2 focus:ring-zinc-500"
                   :class="[
                     isDarkMode
-                      ? 'border-white/10 bg-zinc-950/45 text-white hover:border-white/20'
+                      ? 'border-white/10 bg-[#2c2c2e] text-white hover:border-white/20'
                       : 'border-zinc-200/80 bg-white/80 text-zinc-950 hover:border-zinc-300'
                   ]"
                 >

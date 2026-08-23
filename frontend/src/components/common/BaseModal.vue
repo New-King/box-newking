@@ -3,7 +3,7 @@
     <Transition name="modal" appear>
       <div v-if="show" class="fixed inset-0 z-50 overflow-y-auto" @click="handleBackdropClick">
         <!-- 背景遮罩 -->
-        <div class="fixed inset-0 bg-zinc-950/45 backdrop-blur-sm transition-opacity"></div>
+        <div class="fixed inset-0 bg-[#242426]/40 backdrop-blur-sm transition-opacity"></div>
 
         <!-- 模态框容器 -->
         <div class="flex min-h-full items-center justify-center p-4">
@@ -13,7 +13,7 @@
             :class="[
               sizeClasses,
               isDarkMode
-                ? 'border-white/10 bg-zinc-900/95 shadow-[0_24px_80px_-36px_rgba(255,255,255,0.18)]'
+                ? 'border-white/10 bg-[#343436] shadow-[0_24px_80px_-36px_rgba(255,255,255,0.18)]'
                 : 'border-white/80 bg-white/90 shadow-[0_24px_80px_-36px_rgba(24,24,27,0.28)]'
             ]"
             @click.stop
@@ -56,7 +56,7 @@
               v-if="$slots.footer"
               class="flex items-center justify-end space-x-3 px-6 py-4 border-t"
               :class="[
-                isDarkMode ? 'border-white/10 bg-zinc-950/35' : 'border-zinc-200/70 bg-zinc-50/80'
+                isDarkMode ? 'border-white/10 bg-[#2c2c2e]' : 'border-zinc-200/70 bg-zinc-50/80'
               ]"
             >
               <slot name="footer"></slot>

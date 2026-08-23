@@ -2,7 +2,7 @@
   <div
     :class="[
       'min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-200 relative overflow-hidden',
-      isDarkMode ? 'bg-gray-900' : 'bg-gray-50'
+      isDarkMode ? 'bg-[#242426]' : 'bg-gray-50'
     ]"
   >
     <div class="absolute inset-0 z-0">
@@ -11,7 +11,7 @@
     </div>
     <div
       class="max-w-md w-full space-y-8 backdrop-blur-lg bg-opacity-20 p-8 rounded-xl border border-opacity-20"
-      :class="[isDarkMode ? 'bg-gray-800 border-gray-600' : 'bg-white/70 border-gray-200']"
+      :class="[isDarkMode ? 'bg-[#343436] border-zinc-600' : 'bg-white/70 border-gray-200']"
     >
       <div>
         <div class="mx-auto h-16 w-16 relative">

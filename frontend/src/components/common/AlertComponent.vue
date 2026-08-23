@@ -59,7 +59,7 @@ const alertIcons = {
 
 const cardClass = computed(() =>
   isDarkMode.value
-    ? 'border-white/10 bg-zinc-900/90'
+    ? 'border-white/10 bg-[#343436]'
     : 'border-zinc-200/80 bg-white/95'
 )
 

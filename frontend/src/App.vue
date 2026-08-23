@@ -49,8 +49,8 @@ onMounted(() => {
         :class="
           adminStore.isAuthenticated
             ? isDarkMode
-              ? 'border-emerald-400/30 bg-emerald-500/15 text-emerald-300 hover:bg-emerald-500/25'
-              : 'border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
+              ? 'border-white/10 bg-zinc-800/80 text-zinc-100 hover:bg-zinc-700'
+              : 'border-slate-200/50 bg-zinc-900 text-white hover:bg-zinc-800'
             : isDarkMode
               ? 'border-white/10 bg-zinc-800/80 text-zinc-100 hover:bg-zinc-700'
               : 'border-slate-200/50 bg-white/80 text-slate-500 hover:text-slate-700'

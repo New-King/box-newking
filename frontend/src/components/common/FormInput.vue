@@ -21,7 +21,7 @@
         class="w-full rounded-xl border px-4 py-2.5 shadow-sm outline-none transition-all duration-200 ease-in-out focus:border-zinc-500 focus:ring-2 focus:ring-zinc-500"
         :class="[
           isDarkMode
-            ? 'border-white/10 bg-zinc-950/45 text-white placeholder-zinc-500 hover:border-white/20'
+            ? 'border-white/10 bg-[#2c2c2e] text-white placeholder-zinc-500 hover:border-white/20'
             : 'border-zinc-200/80 bg-white/80 text-zinc-950 placeholder-zinc-400 hover:border-zinc-300',
           disabled ? 'opacity-50 cursor-not-allowed' : '',
           error ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''

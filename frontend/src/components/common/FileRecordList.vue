@@ -7,7 +7,7 @@
         class="group flex cursor-pointer items-center gap-3 rounded-xl border p-3 transition-all duration-300 sm:gap-4 sm:rounded-2xl sm:p-4"
         :class="
           isDarkMode
-            ? 'border-zinc-800/50 bg-zinc-900/40 hover:border-zinc-700 hover:bg-zinc-800/80'
+            ? 'border-zinc-700/60 bg-[#2c2c2e] hover:border-zinc-600 hover:bg-[#343436]'
             : 'border-slate-100 bg-white shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] hover:border-slate-200 hover:shadow-[0_8px_20px_-8px_rgba(0,0,0,0.1)]'
         "
         @click="$emit('view-details', record)"
@@ -16,7 +16,7 @@
           class="rounded-lg p-2.5 transition-colors sm:rounded-[1rem] sm:p-3.5"
           :class="
             isDarkMode
-              ? 'bg-zinc-950 text-zinc-200 group-hover:bg-white/10'
+              ? 'bg-[#343436] text-zinc-200 group-hover:bg-white/10'
               : 'bg-zinc-100 text-zinc-800 group-hover:bg-zinc-200'
           "
         >
@@ -80,7 +80,7 @@
       class="rounded-2xl border px-4 py-10 text-center text-sm"
       :class="
         isDarkMode
-          ? 'border-zinc-800 bg-zinc-900/40 text-zinc-500'
+          ? 'border-zinc-700/60 bg-[#2c2c2e] text-zinc-500'
           : 'border-slate-100 bg-white text-slate-400'
       "
     >

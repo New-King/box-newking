@@ -2,11 +2,11 @@
   <transition name="fade">
     <div
       v-if="record"
-      class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/60 p-3 backdrop-blur-sm sm:p-4"
+      class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-[#242426]/40 p-3 backdrop-blur-sm sm:p-4"
     >
       <div
         class="w-full max-w-2xl overflow-hidden rounded-2xl border shadow-2xl transition-all duration-300 ease-out"
-        :class="isDarkMode ? 'border-zinc-800 bg-zinc-950/95' : 'border-white/50 bg-white/95'"
+        :class="isDarkMode ? 'border-zinc-700 bg-[#343436]' : 'border-white/50 bg-white/95'"
       >
         <div
           class="border-b px-4 py-3 sm:px-6 sm:py-4"
@@ -36,10 +36,10 @@
         <div class="p-4 sm:p-6">
           <div
             class="mb-4 rounded-2xl p-3 sm:mb-6 sm:p-4"
-            :class="isDarkMode ? 'bg-zinc-900/60' : 'bg-slate-50/95'"
+            :class="isDarkMode ? 'bg-[#2c2c2e]' : 'bg-slate-50/95'"
           >
             <div class="flex items-center mb-3 sm:mb-4">
-              <div class="rounded-xl p-2 sm:p-3" :class="isDarkMode ? 'bg-zinc-950' : 'bg-white'">
+              <div class="rounded-xl p-2 sm:p-3" :class="isDarkMode ? 'bg-[#343436]' : 'bg-white'">
                 <FileIcon
                   class="h-5 w-5 sm:h-6 sm:w-6"
                   :class="isDarkMode ? 'text-zinc-200' : 'text-zinc-800'"
@@ -114,7 +114,7 @@
 
               <div
                 class="rounded-2xl p-3 sm:p-4"
-                :class="isDarkMode ? 'bg-zinc-900/60' : 'bg-slate-50/95'"
+                :class="isDarkMode ? 'bg-[#2c2c2e]' : 'bg-slate-50/95'"
               >
                 <div class="mb-2 flex items-center sm:mb-3">
                   <h4
@@ -167,7 +167,7 @@
 
             <div
               class="flex flex-col items-center rounded-2xl p-4 sm:p-5"
-              :class="isDarkMode ? 'bg-zinc-900/60' : 'bg-slate-50/95'"
+              :class="isDarkMode ? 'bg-[#2c2c2e]' : 'bg-slate-50/95'"
             >
               <div class="mb-3 rounded-xl bg-white p-3 shadow-sm sm:mb-4 sm:p-4">
                 <QRCode :value="qrValue" :size="140" level="M" class="sm:w-[160px] sm:h-[160px]" />
@@ -236,7 +236,7 @@ const qrValue = computed(() => (props.record ? props.getQRCodeValue(props.record
 
 const terminalButtonClass = computed(() =>
   isDarkMode?.value
-    ? 'border-zinc-700 bg-zinc-950/70 text-zinc-100 hover:bg-zinc-800'
+    ? 'border-zinc-700 bg-[#343436] text-zinc-100 hover:bg-[#3a3a3c]'
     : 'border-slate-200 bg-white text-slate-900 hover:bg-slate-100'
 )
 </script>

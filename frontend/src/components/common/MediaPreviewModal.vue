@@ -2,12 +2,12 @@
   <transition name="fade">
     <div
       v-if="visible && record"
-      class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-[#242426]/40 p-4 backdrop-blur-sm"
       @click.self="$emit('close')"
     >
       <div
         class="flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden rounded-2xl border p-5 shadow-2xl backdrop-blur-xl transition-all duration-300 ease-out"
-        :class="isDarkMode ? 'border-zinc-800 bg-zinc-950/95' : 'border-white/50 bg-white/95'"
+        :class="isDarkMode ? 'border-zinc-700 bg-[#343436]' : 'border-white/50 bg-white/95'"
       >
         <div class="mb-4 flex flex-shrink-0 items-center justify-between gap-4">
           <h3
@@ -47,7 +47,7 @@
 
         <div
           class="flex min-h-[16rem] flex-1 items-center justify-center overflow-hidden rounded-xl"
-          :class="isDarkMode ? 'bg-zinc-900/70' : 'bg-slate-50'"
+          :class="isDarkMode ? 'bg-[#2c2c2e]' : 'bg-slate-50'"
         >
           <img
             v-if="mediaType === 'image'"

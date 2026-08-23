@@ -1,14 +1,14 @@
 <template>
   <div
     class="relative flex min-h-screen flex-col items-center justify-center overflow-hidden p-4 font-sans transition-colors duration-700 sm:p-8"
-    :class="isDarkMode ? 'bg-zinc-950 text-zinc-100' : 'bg-[#f5f5f7] text-zinc-900'"
+    :class="isDarkMode ? 'bg-[#242426] text-[#e0e0e0]' : 'bg-[#f5f5f7] text-zinc-900'"
   >
     <div class="relative z-10 w-full max-w-md">
       <div
         class="relative overflow-hidden rounded-[2rem] border backdrop-blur-3xl transition-all duration-500 sm:rounded-[2.5rem]"
         :class="
           isDarkMode
-            ? 'border-white/10 bg-zinc-900/75 shadow-[0_24px_80px_-32px_rgba(255,255,255,0.18)]'
+            ? 'border-white/10 bg-[#343436] shadow-[0_24px_80px_-32px_rgba(255,255,255,0.18)]'
             : 'border-white/70 bg-white/80 shadow-[0_24px_70px_-28px_rgba(24,24,27,0.18)]'
         "
       >

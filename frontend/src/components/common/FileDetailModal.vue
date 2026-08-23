@@ -2,12 +2,12 @@
   <transition name="fade">
     <div
       v-if="visible"
-      class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-[#242426]/40 p-4 backdrop-blur-sm"
       @click.self="$emit('close')"
     >
       <div
         class="w-full max-w-md overflow-hidden rounded-2xl border p-6 shadow-2xl backdrop-blur-xl transition-all duration-300 ease-out sm:p-8"
-        :class="isDarkMode ? 'border-zinc-800 bg-zinc-950/95' : 'border-white/50 bg-white/95'"
+        :class="isDarkMode ? 'border-zinc-700 bg-[#343436]' : 'border-white/50 bg-white/95'"
       >
         <h3
           class="mb-6 truncate text-xl font-semibold tracking-tight sm:text-2xl"

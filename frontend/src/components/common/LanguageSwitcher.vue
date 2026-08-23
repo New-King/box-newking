@@ -29,7 +29,7 @@
         :class="[
           'absolute right-0 z-50 mt-2 w-32 overflow-hidden rounded-xl border shadow-lg',
           isDarkMode
-            ? 'border-zinc-800 bg-zinc-900 text-zinc-100'
+            ? 'border-zinc-700 bg-[#343436] text-zinc-100'
             : 'border-slate-100 bg-white text-slate-700'
         ]"
       >

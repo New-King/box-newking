@@ -20,7 +20,7 @@
         class="min-w-full divide-y"
         :class="[isDarkMode ? 'divide-white/10' : 'divide-zinc-200/70']"
       >
-        <thead :class="[isDarkMode ? 'bg-zinc-950/35' : 'bg-zinc-50/80']">
+        <thead :class="[isDarkMode ? 'bg-[#2c2c2e]' : 'bg-zinc-50/80']">
           <tr>
             <th
               v-for="header in headers"

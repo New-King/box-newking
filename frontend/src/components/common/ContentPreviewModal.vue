@@ -2,12 +2,12 @@
   <transition name="fade">
     <div
       v-if="visible"
-      class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-[#242426]/40 p-4 backdrop-blur-sm"
       @click.self="$emit('close')"
     >
       <div
         class="flex max-h-[85vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border p-5 shadow-2xl backdrop-blur-xl transition-all duration-300 ease-out sm:p-6"
-        :class="isDarkMode ? 'border-zinc-800 bg-zinc-950/95' : 'border-white/50 bg-white/95'"
+        :class="isDarkMode ? 'border-zinc-700 bg-[#343436]' : 'border-white/50 bg-white/95'"
       >
         <div class="flex justify-between items-center mb-4 flex-shrink-0">
           <h3
@@ -45,7 +45,7 @@
         <div class="flex-1 overflow-y-auto custom-scrollbar">
           <div
             class="prose max-w-none p-6 rounded-xl break-words overflow-wrap-anywhere"
-            :class="isDarkMode ? 'prose-invert bg-zinc-900/60' : 'bg-slate-50'"
+            :class="isDarkMode ? 'prose-invert bg-[#2c2c2e]' : 'bg-slate-50'"
             v-html="renderedContent"
           ></div>
         </div>

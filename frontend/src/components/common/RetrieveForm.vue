@@ -79,7 +79,7 @@ const inputClass = computed(() => {
       props.error
         ? 'border-red-500/60 focus:border-red-400 focus:ring-red-500/10'
         : 'border-zinc-800 focus:border-zinc-500 focus:ring-white/10',
-      'bg-zinc-950/50 text-white focus:bg-zinc-900 focus:ring-2 sm:focus:ring-4 focus:shadow-[0_0_18px_rgba(255,255,255,0.1)]'
+      'bg-[#2c2c2e] text-zinc-100 focus:bg-[#2c2c2e] focus:ring-2 sm:focus:ring-4 focus:shadow-[0_0_18px_rgba(255,255,255,0.1)]'
     ]
   }
 

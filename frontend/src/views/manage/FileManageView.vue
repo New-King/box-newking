@@ -372,7 +372,7 @@
             :key="file.id"
             class="transition-colors duration-200"
             :class="[
-              selectedFileIds.has(file.id) ? (isDarkMode ? 'bg-zinc-950/30' : 'bg-zinc-50/70') : '',
+              selectedFileIds.has(file.id) ? (isDarkMode ? 'bg-[#2c2c2e]/50' : 'bg-zinc-50/70') : '',
               isDarkMode ? 'hover:bg-gray-700/70' : 'hover:bg-gray-50'
             ]"
           >
@@ -1324,7 +1324,7 @@ const panelClass = computed(() =>
 )
 const fieldClass = computed(() =>
   isDarkMode.value
-    ? 'border-white/10 bg-zinc-950/45 text-white placeholder-zinc-500'
+    ? 'border-white/10 bg-[#2c2c2e] text-white placeholder-zinc-500'
     : 'border-zinc-200/80 bg-white/80 text-zinc-950 placeholder-zinc-400'
 )
 const detailActionClass = computed(() =>

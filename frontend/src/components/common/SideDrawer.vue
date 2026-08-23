@@ -3,7 +3,7 @@
     <transition name="drawer-overlay" appear>
       <div
         class="fixed inset-0 z-40 backdrop-blur-sm"
-        :class="isDarkMode ? 'bg-black/60' : 'bg-slate-900/20'"
+        :class="isDarkMode ? 'bg-[#242426]/40' : 'bg-slate-900/20'"
         @click="$emit('close')"
       ></div>
     </transition>
@@ -13,7 +13,7 @@
         class="fixed right-0 top-0 z-50 flex h-full w-full flex-col overflow-hidden border-l shadow-2xl sm:w-[28rem]"
         :class="
           isDarkMode
-            ? 'border-zinc-800 bg-zinc-950'
+            ? 'border-zinc-700 bg-[#343436]'
             : 'border-white/50 bg-white/95 backdrop-blur-xl'
         "
       >

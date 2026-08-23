@@ -3,7 +3,7 @@
     class="group relative flex min-h-[10rem] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed p-6 transition-all duration-300 sm:min-h-[12rem] sm:p-8"
     :class="[
       isDarkMode
-        ? 'bg-zinc-950/50 border-zinc-800 hover:border-zinc-600'
+        ? 'bg-[#2c2c2e] border-zinc-700 hover:border-zinc-600'
         : 'bg-white border-slate-200 hover:border-zinc-400',
       isDragActive
         ? isDarkMode

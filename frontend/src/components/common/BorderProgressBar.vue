@@ -29,7 +29,7 @@ const drawProgress = () => {
 
   // 创建渐变
   const gradient = ctx.createLinearGradient(0, 0, width, height)
-  gradient.addColorStop(0, '#18181b')
+  gradient.addColorStop(0, '#2c2c2e')
   gradient.addColorStop(0.5, '#71717a')
   gradient.addColorStop(1, '#e4e4e7')
 

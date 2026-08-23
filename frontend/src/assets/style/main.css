@@ -7,20 +7,20 @@
   --color-page: 245 245 247;
   --color-surface: 255 255 255;
   --color-surface-raised: 255 255 255;
-  --color-surface-muted: 244 244 245;
+  --color-surface-muted: 245 245 247;
   --color-surface-input: 255 255 255;
-  --color-text: 24 24 27;
-  --color-text-strong: 9 9 11;
-  --color-text-muted: 82 82 91;
-  --color-text-subtle: 113 113 122;
+  --color-text: 29 29 31;
+  --color-text-strong: 29 29 31;
+  --color-text-muted: 110 110 115;
+  --color-text-subtle: 134 134 139;
   --color-border: 228 228 231;
-  --color-border-strong: 161 161 170;
-  --color-accent: 24 24 27;
+  --color-border-strong: 174 174 178;
+  --color-accent: 23 23 23;
   --color-accent-contrast: 255 255 255;
   --color-danger: 220 38 38;
   --color-warning: 217 119 6;
   --color-success: 4 120 87;
-  --color-overlay: 9 9 11;
+  --color-overlay: 36 36 38;
   --surface-glass: rgb(var(--color-surface) / 0.78);
   --surface-glass-strong: rgb(var(--color-surface) / 0.92);
   --border-glass: rgb(var(--color-border) / 0.85);
@@ -37,19 +37,19 @@
 
 :root.dark {
   color-scheme: dark;
-  --color-page: 16 16 18;
-  --color-surface: 24 24 27;
-  --color-surface-raised: 39 39 42;
-  --color-surface-muted: 39 39 42;
-  --color-surface-input: 9 9 11;
-  --color-text: 228 228 231;
-  --color-text-strong: 250 250 250;
-  --color-text-muted: 161 161 170;
-  --color-text-subtle: 113 113 122;
+  --color-page: 36 36 38;
+  --color-surface: 44 44 46;
+  --color-surface-raised: 52 52 54;
+  --color-surface-muted: 44 44 46;
+  --color-surface-input: 52 52 54;
+  --color-text: 224 224 224;
+  --color-text-strong: 245 245 247;
+  --color-text-muted: 168 168 170;
+  --color-text-subtle: 122 122 125;
   --color-border: 63 63 70;
   --color-border-strong: 113 113 122;
-  --color-accent: 244 244 245;
-  --color-accent-contrast: 9 9 11;
+  --color-accent: 72 72 73;
+  --color-accent-contrast: 245 245 247;
   --color-danger: 248 113 113;
   --color-warning: 251 191 36;
   --color-success: 52 211 153;
@@ -59,8 +59,8 @@
   --shadow-color: 255 255 255;
   --shadow-panel: 0 22px 54px -36px rgb(var(--shadow-color) / 0.2);
   --shadow-sidebar: 12px 0 40px -28px rgb(var(--shadow-color) / 0.18);
-  --color-scrollbar: 82 82 91;
-  --color-scrollbar-hover: 113 113 122;
+  --color-scrollbar: 58 58 60;
+  --color-scrollbar-hover: 72 72 74;
   --color-focus-ring: 161 161 170;
 }
 
@@ -74,6 +74,17 @@ body {
   font-family: 'DingTalk', sans-serif;
   background-color: rgb(var(--color-page));
   color: rgb(var(--color-text));
+}
+
+:root.dark body {
+  background-image: radial-gradient(
+    ellipse 120% 70% at 50% -12%,
+    rgba(255, 255, 255, 0.045),
+    transparent 52%
+  );
+  background-repeat: no-repeat;
+  background-size: 100% 100vh;
+  background-attachment: fixed;
 }
 
 ::selection {

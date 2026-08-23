@@ -9,7 +9,7 @@
       :class="[
         'flex-grow resize-none rounded-2xl border px-4 py-3 placeholder-slate-400 outline-none transition duration-300 custom-scrollbar focus:ring-2',
         isDarkMode
-          ? 'border-zinc-800 bg-zinc-950/50 text-zinc-100 focus:border-zinc-500 focus:ring-white/10'
+          ? 'border-zinc-700 bg-[#2c2c2e] text-zinc-100 focus:border-zinc-500 focus:ring-white/10'
           : 'border-slate-200 bg-white text-slate-900 focus:border-zinc-400 focus:ring-zinc-950/10'
       ]"
     ></textarea>

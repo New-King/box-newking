@@ -8,7 +8,7 @@
         :class="[
           'relative h-12 rounded-2xl border transition-all duration-300 shadow-sm',
           isDarkMode
-            ? 'bg-zinc-950/50 border-zinc-800 group-hover:border-zinc-700 group-hover:shadow-lg group-hover:shadow-zinc-950/20'
+            ? 'bg-[#2c2c2e] border-zinc-700 group-hover:border-zinc-600 group-hover:shadow-lg group-hover:shadow-zinc-950/20'
             : 'bg-white border-slate-200/80 group-hover:border-slate-300 group-hover:shadow-md group-hover:shadow-slate-200/50'
         ]"
       >
@@ -83,12 +83,12 @@
               ? 'w-full px-5 rounded-2xl'
               : 'w-28 pl-4 pr-9 border-l rounded-r-2xl',
             isDarkMode
-              ? 'text-zinc-100 border-zinc-800 focus:ring-white/10 bg-zinc-950/50'
+              ? 'text-zinc-100 border-zinc-700 focus:ring-white/10 bg-[#2c2c2e]'
               : 'text-slate-900 border-slate-200 focus:ring-zinc-950/10 bg-white'
           ]"
           :style="{
-            color: isDarkMode ? '#f4f4f5' : '#0f172a',
-            backgroundColor: isDarkMode ? 'rgba(9, 9, 11, 0.5)' : '#ffffff'
+            color: isDarkMode ? '#e0e0e0' : '#1d1d1f',
+            backgroundColor: isDarkMode ? '#343436' : '#ffffff'
           }"
         >
           <option
@@ -97,8 +97,8 @@
             :value="option.value"
             :class="[isDarkMode ? 'bg-zinc-900 text-zinc-100' : 'bg-white text-slate-900']"
             :style="{
-              color: isDarkMode ? '#f4f4f5' : '#0f172a',
-              backgroundColor: isDarkMode ? '#18181b' : '#ffffff'
+              color: isDarkMode ? '#e0e0e0' : '#1d1d1f',
+              backgroundColor: isDarkMode ? '#2c2c2e' : '#ffffff'
             }"
           >
             {{ option.label }}

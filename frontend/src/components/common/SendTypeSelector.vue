@@ -1,7 +1,7 @@
 <template>
   <div
     class="mb-5 grid grid-cols-2 rounded-2xl border p-1 sm:mb-6"
-    :class="isDarkMode ? 'border-zinc-800 bg-zinc-950/50' : 'border-slate-200/80 bg-slate-100/80'"
+    :class="isDarkMode ? 'border-zinc-700 bg-[#2c2c2e]' : 'border-slate-200/80 bg-slate-100/80'"
   >
     <button
       type="button"

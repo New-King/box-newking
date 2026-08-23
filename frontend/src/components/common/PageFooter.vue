@@ -1,7 +1,7 @@
 <template>
   <div
     class="flex items-center justify-between border-t px-5 py-4 transition-colors sm:px-8 sm:py-6"
-    :class="isDarkMode ? 'border-zinc-800/60 bg-zinc-900/40' : 'border-slate-100 bg-slate-50/50'"
+    :class="isDarkMode ? 'border-zinc-700/80 bg-[#2c2c2e]' : 'border-slate-100 bg-slate-50/50'"
   >
     <router-link
       v-if="linkText && linkTo"

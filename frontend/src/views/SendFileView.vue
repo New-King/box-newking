@@ -1,7 +1,7 @@
 <template>
   <div
     class="relative flex min-h-screen flex-col items-center justify-center overflow-hidden p-4 font-sans transition-colors duration-700 sm:p-8"
-    :class="isDarkMode ? 'bg-zinc-950 text-zinc-100' : 'bg-[#f5f5f7] text-zinc-900'"
+    :class="isDarkMode ? 'bg-[#242426] text-[#e0e0e0]' : 'bg-[#f5f5f7] text-zinc-900'"
     @paste.prevent="handlePaste"
   >
     <div class="relative z-10 w-full max-w-md">
@@ -9,7 +9,7 @@
         class="relative overflow-hidden rounded-[2rem] border backdrop-blur-3xl transition-all duration-500 sm:rounded-[2.5rem]"
         :class="
           isDarkMode
-            ? 'border-white/10 bg-zinc-900/75 shadow-[0_24px_80px_-32px_rgba(255,255,255,0.18)]'
+            ? 'border-white/10 bg-[#343436] shadow-[0_24px_80px_-32px_rgba(255,255,255,0.18)]'
             : 'border-white/70 bg-white/80 shadow-[0_24px_70px_-28px_rgba(24,24,27,0.18)]'
         "
       >
@@ -86,7 +86,7 @@
         <div
           class="flex items-center justify-between border-t px-5 py-3.5 transition-colors sm:px-8 sm:py-6"
           :class="
-            isDarkMode ? 'border-zinc-800/60 bg-zinc-900/40' : 'border-slate-100 bg-slate-50/50'
+            isDarkMode ? 'border-zinc-700/80 bg-[#2c2c2e]' : 'border-slate-100 bg-slate-50/50'
           "
         >
           <router-link
@@ -242,20 +242,20 @@ select option {
 }
 
 select option:checked {
-  background: rgb(99 102 241 / 0.12) !important;
-  color: rgb(79 70 229) !important;
+  background: rgb(23 23 23 / 0.08) !important;
+  color: rgb(29 29 31) !important;
 }
 
 .dark select option:checked {
-  background: rgb(8 145 178 / 0.25) !important;
-  color: rgb(103 232 249) !important;
+  background: rgb(255 255 255 / 0.12) !important;
+  color: rgb(224 224 224) !important;
 }
 
 select option:hover {
-  background-color: rgb(99 102 241 / 0.1);
+  background-color: rgb(23 23 23 / 0.06);
 }
 
 .dark select option:hover {
-  background-color: rgb(8 145 178 / 0.16);
+  background-color: rgb(255 255 255 / 0.08);
 }
 </style>
