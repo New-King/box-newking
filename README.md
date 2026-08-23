@@ -106,29 +106,48 @@ pnpm dev
 
 ## Docker 部署（生产，单容器）
 
-官方 `lanol/filecodebox` 镜像是**上游原版**（官方前端 + 官方后端），**不能直接用于本仓库**的定制版。
+官方 [`lanol/filecodebox`](https://hub.docker.com/r/lanol/filecodebox) 是上游预构建镜像；本仓库通过 [`.github/workflows/docker-image.yml`](.github/workflows/docker-image.yml) 自动 build 并推送到 **你自己的 Docker Hub**（镜像名 `你的用户名/box-newking`）。
 
-但部署方式完全一样：**一个容器、一个端口**，前端 build 后由后端静态托管。Docker 配置仍在 `backend/`（与官方结构一致），只是改为构建本仓库代码。
+> **注意**：GitHub Actions 只认仓库根目录的 `.github/workflows/`。`backend/.github/workflows/` 是上游遗留副本，**不会自动运行**。
 
-### 构建并启动
+### 首次配置 CI（一次性）
 
-在仓库根目录执行：
+1. 注册 [Docker Hub](https://hub.docker.com/)，创建 Access Token
+2. 打开 GitHub 仓库 **Settings → Secrets and variables → Actions**，添加：
+   - `DOCKER_USERNAME`：Docker Hub 用户名
+   - `DOCKER_PASSWORD`：Access Token
+3. push 到 `main`，或打 tag `v2.5.4`（需与 `backend/VERSION` 一致）
 
-```bash
-docker compose -f backend/docker-compose.yml up -d --build
-```
+打正式 tag 后，镜像会带上版本号 + `latest`，之后服务器可像官方一样一条命令部署。
 
-等价于官方的一条命令风格：
+### 一条命令启动（推荐，需 CI 已发布镜像）
+
+将 `YOUR_DOCKER_USERNAME` 换成你的 Docker Hub 用户名：
 
 ```bash
 docker run -d --restart unless-stopped \
   -p 12345:12345 \
-  -v box-newking-data:/app/data \
+  -v ./data:/app/data \
   --name box-newking \
-  box-newking:local
+  YOUR_DOCKER_USERNAME/box-newking:2.5.4
 ```
 
-（需先 `docker compose -f backend/docker-compose.yml build`）
+访问 `http://服务器IP:12345`，完成首次 `/setup` 初始化。
+
+或用 compose（1Panel 编排也可直接贴）：
+
+```bash
+BOX_NEWKING_IMAGE=YOUR_DOCKER_USERNAME/box-newking:2.5.4 \
+  docker compose -f backend/docker-compose.prod.yml up -d
+```
+
+### 在服务器上本地 build（无预构建镜像时）
+
+```bash
+git clone https://github.com/New-King/box-newking.git
+cd box-newking
+docker compose -f backend/docker-compose.yml up -d --build
+```
 
 ### 访问
 
