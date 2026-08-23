@@ -23,7 +23,8 @@ Special thanks to the original author for creating such a useful tool.
 ```
 box-newking/
 ├── backend/    # FastAPI 后端（源自 FileCodeBox）
-└── frontend/   # Vue 3 前端（源自 FileCodeBoxFronted）
+├── frontend/   # Vue 3 前端（源自 FileCodeBoxFronted）
+└── scripts/    # 开发辅助脚本（不含业务依赖）
 ```
 
 开发时前后端分离启动；生产部署可将前端 build 产物打包进后端镜像（与官方 Docker 方式一致）。
@@ -33,10 +34,41 @@ box-newking/
 - Python **3.12+**
 - Node.js **20+**
 - pnpm **9+**
+- Docker（可选，用于生产部署）
 
 ## 本地启动
 
-### 1. 后端
+### 方式 A：一条命令（推荐）
+
+首次请先完成依赖安装：
+
+```bash
+# 后端虚拟环境（仅首次）
+cd backend
+python3.12 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cd ..
+
+# 前端依赖（仅首次）
+cd frontend && pnpm install && cd ..
+```
+
+之后在仓库根目录：
+
+```bash
+./scripts/dev.sh
+```
+
+会同时启动：
+- 后端 `http://localhost:12345`
+- 前端 `http://localhost:5173`（开发模式，API 走 `frontend/.env.development`）
+
+`scripts/dev.sh` 只是启动脚本，**不引入新的 package 依赖**，前后端依赖仍分别在 `backend/` 和 `frontend/` 里管理。
+
+### 方式 B：分开两个终端
+
+#### 1. 后端
 
 ```bash
 cd backend
@@ -50,7 +82,7 @@ python main.py
 
 **首次运行**请访问 [http://localhost:12345/setup](http://localhost:12345/setup) 完成管理员初始化。
 
-### 2. 前端
+#### 2. 前端
 
 另开一个终端：
 
@@ -62,19 +94,52 @@ pnpm dev
 
 前端默认监听 `http://localhost:5173`，开发环境 API 地址见 `frontend/.env.development`（默认 `http://localhost:12345`）。
 
-若 `pnpm dev` 因 `esbuild` 构建脚本被拦截而失败，可先执行 `pnpm approve-builds` 勾选 `esbuild`，或临时使用：
+`frontend/.npmrc` 已配置允许 `esbuild` 安装脚本（pnpm 11 需要），clone 后执行 `pnpm install` 即可正常 `pnpm dev`。
 
-```bash
-./node_modules/.bin/vite
-```
-
-### 3. 访问
+### 访问
 
 | 地址 | 说明 |
 |------|------|
-| http://localhost:5173 | 用户端（发件 / 取件） |
-| http://localhost:5173/#/admin | 管理端 |
+| http://localhost:5173 | 用户端（发件 / 取件，开发模式） |
+| http://localhost:5173/#/admin | 管理端（开发模式） |
 | http://localhost:12345 | 后端 API |
+
+## Docker 部署（生产，单容器）
+
+官方 `lanol/filecodebox` 镜像是**上游原版**（官方前端 + 官方后端），**不能直接用于本仓库**的定制版。
+
+但部署方式完全一样：**一个容器、一个端口**，前端 build 后由后端静态托管。Docker 配置仍在 `backend/`（与官方结构一致），只是改为构建本仓库代码。
+
+### 构建并启动
+
+在仓库根目录执行：
+
+```bash
+docker compose -f backend/docker-compose.yml up -d --build
+```
+
+等价于官方的一条命令风格：
+
+```bash
+docker run -d --restart unless-stopped \
+  -p 12345:12345 \
+  -v box-newking-data:/app/data \
+  --name box-newking \
+  box-newking:local
+```
+
+（需先 `docker compose -f backend/docker-compose.yml build`）
+
+### 访问
+
+| 地址 | 说明 |
+|------|------|
+| http://localhost:12345 | 用户端 + API（生产模式，前后端同端口） |
+| http://localhost:12345/#/admin | 管理端 |
+| http://localhost:12345/setup | 首次初始化 |
+
+数据持久化在 Docker volume `box-newking-data`（`docker-compose.yml` 中配置）。
+
 
 ## License
 
