@@ -19,7 +19,7 @@
 
         <div class="px-5 pb-7 pt-8 sm:px-8 sm:pb-10 sm:pt-12">
           <PageHeader
-            :title="t('send.title')"
+            :title="headerTitle"
             :subtitle="
               sendType === 'file'
                 ? t('send.uploadArea.placeholder')
@@ -29,34 +29,49 @@
             @title-click="toRetrieve"
           />
           <form @submit.prevent="handleSubmit" class="space-y-6 sm:space-y-8">
-            <SendTypeSelector :selected-type="sendType" @update:selected-type="sendType = $event" />
+            <div class="relative">
+              <button
+                type="button"
+                class="absolute right-2.5 top-2.5 z-20 flex h-11 w-11 items-center justify-center rounded-full border transition-all duration-300 hover:scale-105 active:scale-95 sm:right-3 sm:top-3 sm:h-12 sm:w-12"
+                :class="
+                  isDarkMode
+                    ? 'border-zinc-600/80 bg-[#343436]/95 text-zinc-300 backdrop-blur-sm hover:border-zinc-500 hover:text-zinc-100'
+                    : 'border-slate-200/80 bg-white/95 text-slate-600 backdrop-blur-sm hover:border-slate-300 hover:text-zinc-900'
+                "
+                :aria-label="toggleTypeLabel"
+                :title="toggleTypeLabel"
+                @click.stop="toggleSendType"
+              >
+                <ArrowLeftRight class="h-5 w-5 sm:h-[1.35rem] sm:w-[1.35rem]" :stroke-width="2" />
+              </button>
 
-            <transition name="fade" mode="out-in">
-              <div v-if="sendType === 'file'" key="file" class="grid grid-cols-1 gap-8">
-                <FileUploadArea
-                  class="payload-panel"
-                  :selected-file="selectedFile"
-                  :selected-files="selectedFiles"
-                  :progress="uploadProgress"
-                  :uploaded-bytes="uploadedBytes"
-                  :total-bytes="totalBytes"
-                  :upload-speed="uploadSpeed"
-                  :upload-status="isSubmitting ? 'uploading' : 'idle'"
-                  :description="uploadDescription"
-                  :accepted-types="acceptedTypes"
-                  @file-selected="handleFileSelected"
-                  @files-selected="handleFilesSelected"
-                  @file-drop="handleFileDrop"
-                />
-              </div>
-              <div v-else key="text" class="grid grid-cols-1 gap-8">
-                <TextInputArea
-                  v-model="textContent"
-                  class="payload-panel"
-                  :placeholder="t('send.uploadArea.textInput')"
-                />
-              </div>
-            </transition>
+              <transition name="fade" mode="out-in">
+                <div v-if="sendType === 'file'" key="file">
+                  <FileUploadArea
+                    class="payload-panel"
+                    :selected-file="selectedFile"
+                    :selected-files="selectedFiles"
+                    :progress="uploadProgress"
+                    :uploaded-bytes="uploadedBytes"
+                    :total-bytes="totalBytes"
+                    :upload-speed="uploadSpeed"
+                    :upload-status="isSubmitting ? 'uploading' : 'idle'"
+                    :description="uploadDescription"
+                    :accepted-types="acceptedTypes"
+                    @file-selected="handleFileSelected"
+                    @files-selected="handleFilesSelected"
+                    @file-drop="handleFileDrop"
+                  />
+                </div>
+                <div v-else key="text">
+                  <TextInputArea
+                    v-model="textContent"
+                    class="payload-panel"
+                    :placeholder="t('send.uploadArea.textInput')"
+                  />
+                </div>
+              </transition>
+            </div>
             <ExpirationSelector
               v-model:expiration-method="expirationMethod"
               v-model:expiration-value="expirationValue"
@@ -144,11 +159,11 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
-import { CloudDownloadIcon, HistoryIcon, LoaderCircleIcon, SendIcon } from 'lucide-vue-next'
+import { ArrowLeftRight, CloudDownloadIcon, HistoryIcon, LoaderCircleIcon, SendIcon } from 'lucide-vue-next'
 import PageHeader from '@/components/common/PageHeader.vue'
-import SendTypeSelector from '@/components/common/SendTypeSelector.vue'
 import FileUploadArea from '@/components/common/FileUploadArea.vue'
 import ExpirationSelector from '@/components/common/ExpirationSelector.vue'
 import TextInputArea from '@/components/common/TextInputArea.vue'
@@ -196,6 +211,18 @@ const {
 
 const toRetrieve = () => {
   router.push('/')
+}
+
+const toggleTypeLabel = computed(() =>
+  sendType.value === 'file' ? t('send.sendText') : t('nav.sendFile')
+)
+
+const headerTitle = computed(() =>
+  sendType.value === 'file' ? t('nav.sendFile') : t('send.sendText')
+)
+
+const toggleSendType = () => {
+  sendType.value = sendType.value === 'file' ? 'text' : 'file'
 }
 </script>
 
