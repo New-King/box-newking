@@ -1,5 +1,6 @@
 name: Build and push Docker image
 
+# 已停用自动触发：需要发 Docker Hub 时在 Actions 里手动 Run workflow
 on:
   workflow_dispatch:
     inputs:
@@ -7,12 +8,6 @@ on:
         description: Optional release tag created by Release Please
         required: false
         type: string
-  push:
-    branches:
-      - main
-      - dev
-    tags:
-      - 'v*'
 
 env:
   REGISTRY_IMAGE: ${{ secrets.DOCKER_USERNAME }}/box-newking

@@ -2,11 +2,8 @@
 # 与 newking 项目类似，但不在服务器 build，而是拉 Docker Hub 上的预构建镜像
 name: Deploy to server
 
+# 已停用自动触发：国内服务器 pull Docker Hub 易超时，日常请用「快速部署」
 on:
-  workflow_run:
-    workflows: ["Build and push Docker image"]
-    types: [completed]
-    branches: [main]
   workflow_dispatch:
     inputs:
       image_tag:
