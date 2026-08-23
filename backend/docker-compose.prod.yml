@@ -1,15 +1,19 @@
-# 使用 CI 发布到 Docker Hub 的镜像（无需在服务器上 build）
-# 用法：BOX_NEWKING_IMAGE=你的用户名/box-newking:2.5.4 docker compose -f backend/docker-compose.prod.yml up -d
+# 镜像由 Docker Hub 提供；服务器只 pull + 启动，不在服务器上 build
 services:
   box-newking:
-    image: ${BOX_NEWKING_IMAGE:?请设置 BOX_NEWKING_IMAGE，例如 你的用户名/box-newking:2.5.4}
+    image: ${BOX_NEWKING_IMAGE:?请设置 BOX_NEWKING_IMAGE，例如 你的用户名/box-newking:dev}
     container_name: box-newking
-    volumes:
-      - box-newking-data:/app/data:rw
     restart: unless-stopped
     ports:
-      - "12345:12345"
+      - "127.0.0.1:12345:12345"
+    volumes:
+      - box-newking-data:/app/data:rw
+    networks:
+      - 1panel-network
+
+networks:
+  1panel-network:
+    external: true
 
 volumes:
   box-newking-data:
-    external: false

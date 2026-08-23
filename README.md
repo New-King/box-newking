@@ -104,23 +104,60 @@ pnpm dev
 | http://localhost:5173/#/admin | 管理端（开发模式） |
 | http://localhost:12345 | 后端 API |
 
+## 部署方案（两条流水线）
+
+本仓库同时支持两种部署方式，用途不同、可以并存：
+
+| 流水线 | 文件 | 触发 | 作用 | 谁用 |
+|--------|------|------|------|------|
+| **发布镜像** | `docker-image.yml` | push / tag | build 镜像 → 推 Docker Hub | 别人 `docker run`、你换机器时 |
+| **自动部署** | `deploy.yml` | 镜像 build 成功后 | SSH → `docker pull` → 重启容器 | **你自己**日常 push 上线 |
+
+```
+你 push 到 main
+    ├─→ docker-image.yml：build → Docker Hub（:dev）
+    └─→ deploy.yml：SSH 服务器 pull + 重启（像 newking 一样省心）
+```
+
 ## Docker 部署（生产，单容器）
 
 官方 [`lanol/filecodebox`](https://hub.docker.com/r/lanol/filecodebox) 是上游预构建镜像；本仓库通过 [`.github/workflows/docker-image.yml`](.github/workflows/docker-image.yml) 自动 build 并推送到 **你自己的 Docker Hub**（镜像名 `你的用户名/box-newking`）。
 
 > **注意**：GitHub Actions 只认仓库根目录的 `.github/workflows/`。`backend/.github/workflows/` 是上游遗留副本，**不会自动运行**。
 
-### 首次配置 CI（一次性）
+### 首次配置（一次性）
+
+**A. Docker Hub（给别人 / 标准部署用）**
 
 1. 注册 [Docker Hub](https://hub.docker.com/)，创建 Access Token
-2. 打开 GitHub 仓库 **Settings → Secrets and variables → Actions**，添加：
+2. GitHub → **Settings → Secrets → Actions**，添加：
    - `DOCKER_USERNAME`：Docker Hub 用户名
    - `DOCKER_PASSWORD`：Access Token
-3. push 到 `main`，或打 tag `v2.5.4`（需与 `backend/VERSION` 一致）
 
-打正式 tag 后，镜像会带上版本号 + `latest`，之后服务器可像官方一样一条命令部署。
+**B. 自动部署到你自己的服务器（像 newking）**
 
-### 一条命令启动（推荐，需 CI 已发布镜像）
+在 GitHub Secrets 中再添加（可与 newking 共用同一台服务器）：
+
+| Secret | 说明 |
+|--------|------|
+| `DEPLOY_KEY` | SSH 私钥（与 newking 相同即可） |
+| `SERVER_HOST` | 服务器 IP 或域名 |
+| `SERVER_PORT` | SSH 端口，通常 `22` |
+| `SERVER_USER` | SSH 用户，如 `root` |
+
+服务器需已存在 Docker 网络 `1panel-network`（1Panel 默认有）。首次部署前在 1Panel 为 `box.new-king.com` 配置反代到 `http://127.0.0.1:12345`。
+
+配置完成后 push 到 `main`：先 build 镜像，再自动部署。也可在 Actions 里手动 **Run workflow** 部署指定 tag。
+
+打正式 tag（需与 `backend/VERSION` 一致）：
+
+```bash
+git tag v2.5.4 && git push origin v2.5.4
+```
+
+会发布 `你的用户名/box-newking:2.5.4` 和 `:latest`。
+
+### 别人 / 手动：一条命令启动（Docker Hub 镜像）
 
 将 `YOUR_DOCKER_USERNAME` 换成你的 Docker Hub 用户名：
 

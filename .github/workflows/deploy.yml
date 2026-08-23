@@ -1,0 +1,62 @@
+# 自动部署：Docker 镜像 build 成功后 → SSH 到服务器 pull 并重启
+# 与 newking 项目类似，但不在服务器 build，而是拉 Docker Hub 上的预构建镜像
+name: Deploy to server
+
+on:
+  workflow_run:
+    workflows: ["Build and push Docker image"]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: 要部署的镜像 tag（默认 dev，正式版可填 2.5.4）
+        required: false
+        default: dev
+
+jobs:
+  deploy:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Sync compose file to server
+        env:
+          IMAGE_TAG: ${{ github.event.inputs.image_tag || 'dev' }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          SSH="ssh -i ~/.ssh/deploy_key -p ${{ secrets.SERVER_PORT }} -o StrictHostKeyChecking=no"
+          ${SSH} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "mkdir -p /opt/server/box-newking"
+          rsync -avz \
+            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SERVER_PORT }} -o StrictHostKeyChecking=no" \
+            backend/docker-compose.prod.yml \
+            ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/opt/server/box-newking/docker-compose.prod.yml
+
+      - name: Pull image and restart container
+        env:
+          IMAGE_TAG: ${{ github.event.inputs.image_tag || 'dev' }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.SERVER_PORT }} -o StrictHostKeyChecking=no \
+            ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "
+              set -euo pipefail
+              cd /opt/server/box-newking
+              export BOX_NEWKING_IMAGE=${{ secrets.DOCKER_USERNAME }}/box-newking:${IMAGE_TAG}
+              echo \"Deploying \$BOX_NEWKING_IMAGE\"
+              docker pull \"\$BOX_NEWKING_IMAGE\"
+              docker compose -f docker-compose.prod.yml up -d
+              docker compose -f docker-compose.prod.yml ps
+            "
+
+      - name: Health check
+        run: |
+          sleep 5
+          curl -fsS "https://box.new-king.com/health" || echo "健康检查未通过（可能域名/反代尚未配置）"
