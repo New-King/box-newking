@@ -204,7 +204,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject } from 'vue'
+import { computed, inject, type Ref } from 'vue'
 import {
   ClipboardCopyIcon,
   ClockIcon,
@@ -231,7 +231,7 @@ defineEmits<{
 }>()
 
 const { t } = useI18n()
-const isDarkMode = inject('isDarkMode')
+const isDarkMode = inject<Ref<boolean>>('isDarkMode')
 const qrValue = computed(() => (props.record ? props.getQRCodeValue(props.record) : ''))
 
 const terminalButtonClass = computed(() =>
