@@ -20,11 +20,6 @@
         <div class="px-5 pb-7 pt-8 sm:px-8 sm:pb-10 sm:pt-12">
           <PageHeader
             :title="headerTitle"
-            :subtitle="
-              sendType === 'file'
-                ? t('send.uploadArea.placeholder')
-                : t('send.uploadArea.textInput')
-            "
             mode="send"
             @title-click="toRetrieve"
           />
@@ -98,53 +93,13 @@
           </form>
         </div>
 
-        <div
-          class="flex items-center justify-between border-t px-5 py-3.5 transition-colors sm:px-8 sm:py-6"
-          :class="
-            isDarkMode ? 'border-zinc-700/80 bg-[#2c2c2e]' : 'border-slate-100 bg-slate-50/50'
-          "
-        >
-          <router-link
-            to="/"
-            class="group flex items-center gap-1.5 text-xs font-medium transition-colors sm:gap-2 sm:text-sm"
-            :class="
-              isDarkMode
-                ? 'text-zinc-400 hover:text-zinc-100'
-                : 'text-slate-500 hover:text-zinc-950'
-            "
-          >
-            <CloudDownloadIcon
-              class="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 sm:h-4 sm:w-4"
-            />
-            {{ t('send.needRetrieveFile') }}
-          </router-link>
-          <button
-            type="button"
-            @click="toggleDrawer"
-            class="group flex items-center gap-1.5 text-xs font-medium transition-colors sm:gap-2 sm:text-sm"
-            :class="
-              isDarkMode
-                ? 'text-zinc-400 hover:text-zinc-100'
-                : 'text-slate-500 hover:text-zinc-950'
-            "
-          >
-            <HistoryIcon
-              class="h-3.5 w-3.5 transition-transform group-hover:-rotate-12 sm:h-4 sm:w-4"
-            />
-            {{ t('send.sendRecords') }}
-          </button>
-        </div>
+        <PageFooter
+          link-direction="retrieve"
+          :link-text="t('send.needRetrieveFile')"
+          link-to="/"
+        />
       </div>
     </div>
-
-    <SideDrawer :visible="showDrawer" :title="t('send.sendRecords')" @close="toggleDrawer">
-      <SentRecordList
-        :records="sendRecords"
-        @copy-link="copySentRecordLink"
-        @view-details="viewDetails"
-        @delete-record="deleteRecord"
-      />
-    </SideDrawer>
 
     <SentRecordDetailModal
       :record="selectedRecord"
@@ -162,13 +117,12 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
-import { ArrowLeftRight, CloudDownloadIcon, HistoryIcon, LoaderCircleIcon, SendIcon } from 'lucide-vue-next'
+import { ArrowLeftRight, LoaderCircleIcon, SendIcon } from 'lucide-vue-next'
 import PageHeader from '@/components/common/PageHeader.vue'
+import PageFooter from '@/components/common/PageFooter.vue'
 import FileUploadArea from '@/components/common/FileUploadArea.vue'
 import ExpirationSelector from '@/components/common/ExpirationSelector.vue'
 import TextInputArea from '@/components/common/TextInputArea.vue'
-import SideDrawer from '@/components/common/SideDrawer.vue'
-import SentRecordList from '@/components/common/SentRecordList.vue'
 import SentRecordDetailModal from '@/components/common/SentRecordDetailModal.vue'
 import { useInjectedDarkMode, useSendFlow } from '@/composables'
 
@@ -187,10 +141,8 @@ const {
   totalBytes,
   uploadSpeed,
   acceptedTypes,
-  showDrawer,
   selectedRecord,
   isSubmitting,
-  sendRecords,
   uploadDescription,
   expirationOptions,
   closeDetails,
@@ -198,15 +150,12 @@ const {
   copySentRecordLink,
   copySentRecordCurlCommand,
   copySentRecordWgetCommand,
-  deleteRecord,
   getQRCodeValue,
   handleFileDrop,
   handleFileSelected,
   handleFilesSelected,
   handlePaste,
-  handleSubmit,
-  toggleDrawer,
-  viewDetails
+  handleSubmit
 } = useSendFlow()
 
 const toRetrieve = () => {

@@ -161,9 +161,14 @@ const rules = [
     patterns: [/<input[^>]*v-model=['"]editForm\.(code|prefix|suffix|expired_at|expired_count)['"]/],
   },
   {
-    name: '发送页记录列表统一使用 SentRecordList',
+    name: '发送页不内联发件记录列表',
     files: ['src/views/SendFileView.vue'],
-    patterns: [/v-for=['"]record in sendRecords['"]/],
+    patterns: [/v-for=['"]record in sendRecords['"]/, /<SentRecordList\b/],
+  },
+  {
+    name: '取件页不内联取件记录列表',
+    files: ['src/views/RetrievewFileView.vue'],
+    patterns: [/v-for=['"]record in records['"]/, /<FileRecordList\b/],
   },
   {
     name: '发送页记录详情统一使用 SentRecordDetailModal',

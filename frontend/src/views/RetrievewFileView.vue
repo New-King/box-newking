@@ -31,22 +31,12 @@
           />
         </div>
         <PageFooter
+          link-direction="send"
           :link-text="$t('retrieve.needSendFile')"
           link-to="/send"
-          :drawer-text="$t('retrieve.recordsDrawer')"
-          @toggle-drawer="toggleDrawer"
         />
       </div>
     </div>
-
-    <SideDrawer :visible="showDrawer" :title="$t('retrieve.recordsDrawer')" @close="toggleDrawer">
-      <FileRecordList
-        :records="records"
-        @view-details="viewDetails"
-        @download-record="downloadRecord"
-        @delete-record="deleteRecord"
-      />
-    </SideDrawer>
 
     <FileDetailModal
       :visible="!!selectedRecord"
@@ -71,9 +61,7 @@ import { useRoute, useRouter } from 'vue-router'
 import PageHeader from '@/components/common/PageHeader.vue'
 import RetrieveForm from '@/components/common/RetrieveForm.vue'
 import PageFooter from '@/components/common/PageFooter.vue'
-import SideDrawer from '@/components/common/SideDrawer.vue'
 import FileDetailModal from '@/components/common/FileDetailModal.vue'
-import FileRecordList from '@/components/common/FileRecordList.vue'
 import ContentPreviewModal from '@/components/common/ContentPreviewModal.vue'
 import { useRetrieveFlow } from '@/composables'
 import { useInjectedDarkMode } from '@/composables'
@@ -86,20 +74,14 @@ const {
   code,
   inputStatus,
   error,
-  records,
   selectedRecord,
-  showDrawer,
   showPreview,
   renderedContent,
   closeContentPreview,
   closeDetails,
   copyContent,
-  deleteRecord,
-  downloadRecord,
   handleSubmit,
-  showContentPreview,
-  toggleDrawer,
-  viewDetails
+  showContentPreview
 } = useRetrieveFlow()
 
 const toSend = () => {

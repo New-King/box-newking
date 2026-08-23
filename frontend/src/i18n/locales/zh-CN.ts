@@ -19,6 +19,7 @@ export default {
     info: '信息',
     search: '搜索',
     copy: '复制',
+    historyRecords: '历史记录',
     uploadSuccess: '上传成功',
     uploadFailed: '上传失败',
     copySuccess: '复制成功',

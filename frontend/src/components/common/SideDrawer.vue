@@ -21,18 +21,22 @@
           class="flex items-center justify-between border-b px-5 py-5 sm:px-8 sm:py-6"
           :class="isDarkMode ? 'border-zinc-800/80' : 'border-slate-100'"
         >
-          <h3
-            class="flex items-center gap-2 text-lg font-semibold tracking-tight sm:gap-3 sm:text-xl"
-            :class="isDarkMode ? 'text-zinc-100' : 'text-slate-800'"
-          >
-            <span
-              class="rounded-lg p-1.5 sm:rounded-xl sm:p-2"
-              :class="isDarkMode ? 'bg-white/10 text-zinc-100' : 'bg-zinc-100 text-zinc-900'"
-            >
-              <HistoryIcon class="h-[18px] w-[18px] sm:h-5 sm:w-5" />
-            </span>
-            {{ title }}
-          </h3>
+          <div class="min-w-0 flex-1 pr-3">
+            <slot name="header">
+              <h3
+                class="flex items-center gap-2 text-lg font-semibold tracking-tight sm:gap-3 sm:text-xl"
+                :class="isDarkMode ? 'text-zinc-100' : 'text-slate-800'"
+              >
+                <span
+                  class="rounded-lg p-1.5 sm:rounded-xl sm:p-2"
+                  :class="isDarkMode ? 'bg-white/10 text-zinc-100' : 'bg-zinc-100 text-zinc-900'"
+                >
+                  <HistoryIcon class="h-[18px] w-[18px] sm:h-5 sm:w-5" />
+                </span>
+                {{ title }}
+              </h3>
+            </slot>
+          </div>
           <button
             type="button"
             @click="$emit('close')"
@@ -58,7 +62,7 @@ import { HistoryIcon, XIcon } from 'lucide-vue-next'
 
 interface Props {
   visible: boolean
-  title: string
+  title?: string
 }
 
 interface Emits {

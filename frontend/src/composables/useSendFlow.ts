@@ -31,11 +31,9 @@ export function useSendFlow() {
   const totalBytes = ref(0)
   const uploadSpeed = ref(0)
   const lastProgressSnapshot = ref({ loaded: 0, time: 0 })
-  const showDrawer = ref(false)
   const selectedRecord = ref<SentFileRecord | null>(null)
   const isSubmitting = ref(false)
   const fileHash = ref('')
-  const sendRecords = computed(() => fileDataStore.shareData)
   const uploadDescription = computed(() =>
     t('send.uploadArea.descriptionWithLimit', {
       size: getStorageUnit(config.value.uploadSize)
@@ -364,23 +362,8 @@ export function useSendFlow() {
     }
   }
 
-  const toggleDrawer = () => {
-    showDrawer.value = !showDrawer.value
-  }
-
-  const viewDetails = (record: SentFileRecord) => {
-    selectedRecord.value = record
-  }
-
   const closeDetails = () => {
     selectedRecord.value = null
-  }
-
-  const deleteRecord = (id: number) => {
-    const index = fileDataStore.shareData.findIndex((record) => record.id === id)
-    if (index !== -1) {
-      fileDataStore.deleteShareData(index)
-    }
   }
 
   return {
@@ -396,14 +379,11 @@ export function useSendFlow() {
     totalBytes,
     uploadSpeed,
     acceptedTypes,
-    showDrawer,
     selectedRecord,
     isSubmitting,
-    sendRecords,
     uploadDescription,
     expirationOptions,
     closeDetails,
-    deleteRecord,
     copySentRecordCode: sentRecordActions.copyCode,
     copySentRecordLink: sentRecordActions.copyLink,
     copySentRecordCurlCommand: sentRecordActions.copyCurlCommand,
@@ -414,8 +394,6 @@ export function useSendFlow() {
     handleFileSelected,
     handleFilesSelected,
     handlePaste,
-    handleSubmit,
-    toggleDrawer,
-    viewDetails
+    handleSubmit
   }
 }

@@ -2,12 +2,13 @@
 import { computed, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { RouterLink, RouterView } from 'vue-router'
-import { LogInIcon, ShieldCheckIcon } from 'lucide-vue-next'
+import { LogInIcon, ShieldCheckIcon, HistoryIcon } from 'lucide-vue-next'
 import { useI18n } from 'vue-i18n'
 import ThemeToggle from './components/common/ThemeToggle.vue'
 import LanguageSwitcher from './components/common/LanguageSwitcher.vue'
+import HistoryRecordsDrawer from '@/components/common/HistoryRecordsDrawer.vue'
 import AlertComponent from '@/components/common/AlertComponent.vue'
-import { useAdminSession, useAppShell } from '@/composables'
+import { useAdminSession, useAppShell, useHistoryRecordsDrawer } from '@/composables'
 import { ROUTES } from '@/constants'
 import { useConfigStore } from '@/stores/configStore'
 import { useAdminStore } from '@/stores/adminStore'
@@ -26,6 +27,7 @@ const { config } = storeToRefs(configStore)
 const adminStore = useAdminStore()
 const { t } = useI18n()
 const { verifySession } = useAdminSession()
+const { toggle: toggleHistoryDrawer } = useHistoryRecordsDrawer()
 const showAdminAddress = computed(() => config.value.showAdminAddr === 1)
 const adminEntryLabel = computed(() =>
   t(adminStore.isAuthenticated ? 'admin.session.loggedIn' : 'admin.session.loggedOut')
@@ -61,6 +63,20 @@ onMounted(() => {
         <ShieldCheckIcon v-if="adminStore.isAuthenticated" class="h-5 w-5" />
         <LogInIcon v-else class="h-5 w-5" />
       </RouterLink>
+      <button
+        type="button"
+        class="rounded-full border p-2.5 shadow-sm backdrop-blur-xl transition-all duration-300 hover:scale-105 active:scale-95 sm:p-3"
+        :class="
+          isDarkMode
+            ? 'border-white/10 bg-zinc-800/80 text-zinc-100 hover:bg-zinc-700'
+            : 'border-slate-200/50 bg-white/80 text-slate-500 hover:text-slate-700'
+        "
+        :aria-label="t('common.historyRecords')"
+        :title="t('common.historyRecords')"
+        @click="toggleHistoryDrawer"
+      >
+        <HistoryIcon class="h-5 w-5" />
+      </button>
       <LanguageSwitcher />
       <ThemeToggle v-model="isDarkMode" />
     </div>
@@ -73,6 +89,7 @@ onMounted(() => {
       </transition>
     </RouterView>
 
+    <HistoryRecordsDrawer />
     <AlertComponent />
   </div>
 </template>

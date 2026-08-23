@@ -1,6 +1,5 @@
 import { computed, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { storeToRefs } from 'pinia'
 import { FileService } from '@/services'
 import { useAlertStore } from '@/stores/alertStore'
 import { useFileDataStore } from '@/stores/fileData'
@@ -8,7 +7,6 @@ import type { ReceivedFileRecord, ShareMetadataResponse, ShareSelectResponse } f
 import { copyToClipboard } from '@/utils/clipboard'
 import { getErrorMessage, getResponseMessage } from '@/utils/common'
 import { renderMarkdownPreview } from '@/utils/content-preview'
-import { downloadReceivedRecord } from '@/utils/download-action'
 
 type InputStatus = {
   readonly: boolean
@@ -19,7 +17,6 @@ export function useRetrieveFlow() {
   const { t } = useI18n()
   const alertStore = useAlertStore()
   const fileStore = useFileDataStore()
-  const { receiveData: records } = storeToRefs(fileStore)
 
   const code = ref('')
   const inspectedFile = ref<ShareMetadataResponse | null>(null)
@@ -32,7 +29,6 @@ export function useRetrieveFlow() {
   const error = ref('')
   const selectedRecord = ref<ReceivedFileRecord | null>(null)
   const previewMediaRecord = ref<ReceivedFileRecord | null>(null)
-  const showDrawer = ref(false)
   const showPreview = ref(false)
   const showMediaPreview = ref(false)
   const renderedContent = ref('')
@@ -167,31 +163,8 @@ export function useRetrieveFlow() {
     }
   }
 
-  const viewDetails = (record: ReceivedFileRecord) => {
-    selectedRecord.value = record
-  }
-
   const closeDetails = () => {
     selectedRecord.value = null
-  }
-
-  const deleteRecord = (id: number) => {
-    const index = records.value.findIndex((record) => record.id === id)
-    if (index !== -1) {
-      fileStore.deleteReceiveData(index)
-    }
-  }
-
-  const toggleDrawer = () => {
-    showDrawer.value = !showDrawer.value
-  }
-
-  const downloadRecord = async (record: ReceivedFileRecord) => {
-    try {
-      await downloadReceivedRecord(record)
-    } catch (err: unknown) {
-      alertStore.showAlert(getErrorMessage(err, t('common.downloadFailed')), 'error')
-    }
   }
 
   const showContentPreview = () => {
@@ -244,10 +217,8 @@ export function useRetrieveFlow() {
     hasValidCode,
     inputStatus,
     error,
-    records,
     selectedRecord,
     previewMediaRecord,
-    showDrawer,
     showPreview,
     showMediaPreview,
     renderedContent,
@@ -255,14 +226,10 @@ export function useRetrieveFlow() {
     closeContentPreview,
     closeDetails,
     copyContent,
-    deleteRecord,
-    downloadRecord,
     handleSubmit,
     inspectCode,
     resetInspection,
     showFilePreview,
-    showContentPreview,
-    toggleDrawer,
-    viewDetails
+    showContentPreview
   }
 }

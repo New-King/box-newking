@@ -11,7 +11,12 @@
         isDarkMode ? 'text-zinc-400 hover:text-zinc-100' : 'text-slate-500 hover:text-zinc-950'
       "
     >
+      <CloudDownloadIcon
+        v-if="linkDirection === 'retrieve'"
+        class="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 sm:h-4 sm:w-4"
+      />
       <SendIcon
+        v-else
         class="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 sm:h-4 sm:w-4"
       />
       {{ linkText }}
@@ -19,6 +24,7 @@
     <span v-else></span>
 
     <button
+      v-if="drawerText"
       type="button"
       @click="$emit('toggle-drawer')"
       class="group flex items-center gap-1.5 text-xs font-medium transition-colors sm:gap-2 sm:text-sm"
@@ -34,12 +40,13 @@
 
 <script setup lang="ts">
 import { inject } from 'vue'
-import { HistoryIcon, SendIcon } from 'lucide-vue-next'
+import { HistoryIcon, SendIcon, CloudDownloadIcon } from 'lucide-vue-next'
 
 interface Props {
   linkText?: string
   linkTo?: string
-  drawerText: string
+  linkDirection?: 'send' | 'retrieve'
+  drawerText?: string
 }
 
 interface Emits {

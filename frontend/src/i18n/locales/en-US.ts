@@ -19,6 +19,7 @@ export default {
     info: 'Information',
     search: 'Search',
     copy: 'Copy',
+    historyRecords: 'History',
     uploadSuccess: 'Upload successful',
     uploadFailed: 'Upload failed',
     copySuccess: 'Copy successful',
