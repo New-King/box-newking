@@ -27,8 +27,9 @@ htmlcov/
 .DS_Store
 ._*
 
-# Frontend source (will be built from GitHub)
+# Frontend source (will be built from GitHub in full Dockerfile)
 fcb-fronted/
+# 快速部署：themes 由 compose 从宿主机挂载，不必打进镜像
 themes/
 
 # Test files
