@@ -9,7 +9,8 @@ export const STORAGE_KEYS = {
   CONFIG: 'config',
   NOTIFY: 'notify',
   SEND_RECORDS: 'box-newking:send-records',
-  RECEIVE_RECORDS: 'box-newking:receive-records'
+  RECEIVE_RECORDS: 'box-newking:receive-records',
+  SEND_TYPE: 'box-newking:send-type'
 } as const
 
 // 主题模式

@@ -9,6 +9,7 @@ import { getClipboardFile, insertTextAtSelection } from '@/utils/clipboard-paste
 import { getErrorMessage } from '@/utils/common'
 import { getStorageUnit } from '@/utils/convert'
 import { calculateFileHash } from '@/utils/file-processing'
+import { readStoredSendType, writeStoredSendType } from '@/utils/preference-storage'
 import { buildSentRecord, isExpirationWithinLimit } from '@/utils/send-record'
 import { createSentRecordActions } from '@/utils/sent-record-actions'
 import { useSendSubmit } from './useSendSubmit'
@@ -20,7 +21,8 @@ export function useSendFlow() {
   const configStore = useConfigStore()
   const fileDataStore = useFileDataStore()
   const config = computed(() => configStore.config)
-  const sendType = ref<SendType>('file')
+  const sendType = ref<SendType>(readStoredSendType())
+  watch(sendType, writeStoredSendType)
   const selectedFile = ref<File | null>(null)
   const selectedFiles = ref<File[]>([])
   const textContent = ref('')

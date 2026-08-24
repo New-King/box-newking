@@ -35,10 +35,6 @@
                 "
                 :aria-label="toggleTypeLabel"
                 :title="toggleTypeLabel"
-                @mouseenter="toggleHovered = true"
-                @mouseleave="toggleHovered = false"
-                @focus="toggleHovered = true"
-                @blur="toggleHovered = false"
                 @click.stop="toggleSendType"
               >
                 <MorphIcon
@@ -123,7 +119,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { File, Type } from 'lucide'
@@ -173,18 +169,12 @@ const toRetrieve = () => {
   router.push('/')
 }
 
-const toggleHovered = ref(false)
-
 const toggleTypeLabel = computed(() =>
   sendType.value === 'file' ? t('send.sendText') : t('nav.sendFile')
 )
 
-const toggleIcon = computed(() => {
-  if (sendType.value === 'file') {
-    return toggleHovered.value ? Type : File
-  }
-  return toggleHovered.value ? File : Type
-})
+// 始终显示「切换目标」图标，避免 hover + click 同时触发时 morph 来回跳
+const toggleIcon = computed(() => (sendType.value === 'file' ? Type : File))
 
 const headerTitle = computed(() =>
   sendType.value === 'file' ? t('nav.sendFile') : t('send.sendText')
